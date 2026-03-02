@@ -33,7 +33,7 @@ class GalaxyPotential:
     Methods
     ----------
     Potential(R,z) :            returns P
-        Potential at postion(s)
+        Potential at position(s)
     Potential_derivatives(R,z): returns P, dPdR, dPdz
         Potential and derivatives at position(s)
     ForceRz(R,z) :              returns f_R,f_z
@@ -67,7 +67,7 @@ class GalaxyPotential:
     kpc_Myr_to_km_s = 977.77
 
     def __init__(self,filename):
-        """Intialise interface for Dehnen's GalaxyPotential C++ code
+        """Initialise interface for Dehnen's GalaxyPotential C++ code
 
         Parameters:
             filename: file containing parameters of galaxy potential
@@ -160,7 +160,7 @@ class GalaxyPotential:
         return pot #* self.kpc_Myr_to_km_s**2
 
     def Potential_derivatives(self,R,z):
-        """Returns potential and its derivatives wrt R,z at R, z
+        """Returns potential and its derivatives with respect to R,z at R, z
 
         Parameters:
             R: Float or array of floats.
@@ -172,9 +172,9 @@ class GalaxyPotential:
             pot: Float or numpy array.
                 Potential in M_solar kpc**2/Myr**2.
             dPdR: Float or numpy array.
-                Derivative of pot wrt to R in M_solar kpc/Myr**2.
+                Derivative of pot with respect to R in M_solar kpc/Myr**2.
             dPdz: Float or numpy array.
-                Derivative of pot wrt to z in M_solar kpc/Myr**2.
+                Derivative of pot with respect to z in M_solar kpc/Myr**2.
         """
         if len(np.array(R).reshape(-1)) == 1:
             dPdR = c_double()
@@ -409,7 +409,7 @@ class OrbitIntegrator:
     GalPot in Python.
 
     The original C++ code is still the main element, and this just calls
-    the relevant functions. It is noticibly faster than using Python
+    the relevant functions. It is noticeably faster than using Python
     integrators if you are only interested in the orbital parameters.
 
     Everything is given in GalaxyPotential's internal units, with are
@@ -429,7 +429,7 @@ class OrbitIntegrator:
     kpc_Myr_to_km_s = 977.77
 
     def __init__(self,GalaxyPotentialInput):
-        """Intialise interface for orbit integration in GalPot
+        """Initialise interface for orbit integration in GalPot
 
         Parameters:
             GalaxyPotentialInput : GalaxyPotential
@@ -487,8 +487,8 @@ class OrbitIntegrator:
                 Radius of a circular orbit with the same angular momentum
             PseudoEccentricity: ndarray (or float if one dimensional array input)
                 (Apocentre-Pericentre)/(Apocentre+Pericentre). I call it
-                "Pseudo" becuase eccentricity only really makes sense in a
-                sperically symmetric system
+                "Pseudo" because eccentricity only really makes sense in a
+                spherically symmetric system
 
         """
 
@@ -569,8 +569,8 @@ class OrbitIntegrator:
                     Radius of a circular orbit with the same angular momentum
                 PseudoEccentricity: ndarray (or float if one dimensional array input)
                     (Apocentre-Pericentre)/(Apocentre+Pericentre). I call it
-                    "Pseudo" becuase eccentricity only really makes sense in a
-                    sperically symmetric system
+                    "Pseudo" because eccentricity only really makes sense in a
+                    spherically symmetric system
 
         """
         # find maximum (or minimum if negative)

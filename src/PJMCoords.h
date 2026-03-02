@@ -19,7 +19,7 @@ coordinate systems.
   system, whereas the observer's natural coordinate systems are heliocentric
   and polar, the latter since position on the sky and distance are completely
   different observables. The so called equatorial coordinates (distance,
-  right ascension, declination and their time derivatives) are orientad at
+  right ascension, declination and their time derivatives) are oriented at
   the earth's polar axis. However, because of the earth's precession, that
   axis is not at a fixed angle with respect to very distant objects.
   Therefore, one often uses so-called galactic coordinates which are also
@@ -42,7 +42,7 @@ coordinate systems.
       position = (R,Z,phi),  velocity = (vR,vZ,vphi)
       units: as defined in Units.h (kpc, radian, kpc/Myr)
          The cylindrical galactocentric coordinates are easily defined in
-      terms of the galactrocentric cartesian coordinates introduced above:
+      terms of the galactrocentric Cartesian coordinates introduced above:
                 X = R cos(phi), Y = R sin(phi), Z = z
         vR = dR/dt, vz = dz/dt, vphi = R dphi/dt.
 
@@ -50,19 +50,19 @@ coordinate systems.
   LSR Local Standard of Rest
       position = (x,y,z), velocity = (u,v,w)
       units: as defined in Units.h (kpc, kpc/Myr)
-         The local standard of rest (LSR) represents an inertial (non-rota-
-      ting) coordinate system with origin of position on the sun, e_x poin-
-      ting towards the Galactic centre (GC), e_y in direction of Galactic
+         The local standard of rest (LSR) represents an inertial (non-rotating)
+       coordinate system with origin of position on the sun, e_x pointing
+       towards the Galactic centre (GC), e_y in direction of Galactic
       rotation (GR), and e_z towards NGP, i.e.
                 (x,y,z) = (R0-X, -Y, Z-Zsun)
       where R0 is the distance sun-GC, and Zsun is the solar height above the
-      plane. The LSR's origin of velocity is on that of a (hypothetic) star
+      plane. The LSR's origin of velocity is on that of a (hypothetical) star
       on a circular orbit at the solar position, i.e.
                 (u,v,w) = (-v_X, v_circ-v_Y, v_Z)
       where v_circ is the circular rotation velocity at R=R0, for the Milky
       Way it is negative (it's adopted value and those for R0, Zsun are taken
-      from the file Constants.h). The velocity (u,v,w) of a star w.r.t. LSR
-      are often called its `peculiar motion'.
+      from the file Constants.h). The velocity (u,v,w) of a star with respect
+      to LSR are often called its `peculiar motion'.
       In the literature the direction of the x or u vector is not unique,
       some authors use GC others GAC direction. Here, GC direction is used,
       in order to end up with a right-handed coordinate system.
@@ -113,14 +113,14 @@ coordinate systems.
   Summary of Coordinate Systems:
 
    centre   |                coordinate system
-   x   v    | cartesian |  cylindrical | spherical polar
+   x   v    | Cartesian |  cylindrical | spherical polar
   ----------+--------------------------------------------
-  GC   GC @)|    GCA          GCY               -
+  GC   GC @)|   GCA          GCY               -
   sun  LSR  |   LSR           -                -
   sun  sun  |   HCA           -             HGP, HEQ
 
   The Transformations between systems with different centres is always done
-  in the cartesian frames.
+  in the Cartesian frames.
 
   --------------
   @) GC denotes the galactic centre
@@ -177,7 +177,7 @@ coordinate systems.
   system, whereas the observer's natural coordinate systems are heliocentric
   and polar, the latter since position on the sky and distance are completely
   different observables. The so called equatorial coordinates (distance,
-  right ascension, declination and their time derivatives) are orientad at
+  right ascension, declination and their time derivatives) are oriented at
   the earth's polar axis. However, because of the earth's precession, that
   axis is not at a fixed angle with respect to very distant objects.
   Therefore, one often uses so-called galactic coordinates which are also
@@ -200,7 +200,7 @@ coordinate systems.
       position = (R,Z,phi),  velocity = (vR,vZ,vphi)
       units: as defined in Units.h (kpc, radian, kpc/Myr)
          The cylindrical galactocentric coordinates are easily defined in
-      terms of the galactrocentric cartesian coordinates introduced above:
+      terms of the galactrocentric Cartesian coordinates introduced above:
                 X = R cos(phi), Y = R sin(phi), Z = z
         vR = dR/dt, vz = dz/dt, vphi = R dphi/dt.
 
@@ -208,13 +208,13 @@ coordinate systems.
   LSR Local Standard of Rest
       position = (x,y,z), velocity = (u,v,w)
       units: as defined in Units.h (kpc, kpc/Myr)
-         The local standard of rest (LSR) represents an inertial (non-rota-
-      ting) coordinate system with origin of position on the sun, e_x poin-
-      ting towards the Galactic centre (GC), e_y in direction of Galactic
+         The local standard of rest (LSR) represents an inertial (non-rotating)
+       coordinate system with origin of position on the sun, e_x pointing
+      towards the Galactic centre (GC), e_y in direction of Galactic
       rotation (GR), and e_z towards NGP, i.e.
                 (x,y,z) = (R0-X, -Y, Z-Zsun)
       where R0 is the distance sun-GC, and Zsun is the solar height above the
-      plane. The LSR's origin of velocity is on that of a (hypothetic) star
+      plane. The LSR's origin of velocity is on that of a (hypothetical) star
       on a circular orbit at the solar position, i.e.
                 (u,v,w) = (-v_X, v_circ-v_Y, v_Z)
       where v_circ is the circular rotation velocity at R=R0, for the Milky
@@ -271,14 +271,14 @@ coordinate systems.
   Summary of Coordinate Systems:
 
    centre   |                coordinate system
-   x   v    | cartesian |  cylindrical | spherical polar
+   x   v    | Cartesian |  cylindrical | spherical polar
   ----------+--------------------------------------------
   GC   GC @)|   GCA          GCY               -
   sun  LSR  |   LSR           -                -
   sun  sun  |   HCA           -             HGP, HEQ
 
   The Transformations between systems with different centres is always done
-  in the cartesian frames.
+  in the Cartesian frames.
 
   --------------
   @) GC denotes the galactic centre

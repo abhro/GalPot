@@ -275,7 +275,7 @@ double LogGamma(const double a, const double x)
 
 double En(const int n, const double x)
 {
-    if(n<0 || x<0. || (x==0. && n<=1)) MathError("bad argumends in En()");
+    if(n<0 || x<0. || (x==0. && n<=1)) MathError("bad arguments in En()");
     if(n==0)  return exp(-x)/x;
     if(x==0.) return 1./double(n-1);
      double ans;

@@ -7,7 +7,7 @@
 *                                                                              *
 ********************************************************************************
 *                                                                              *
-* contains template functions for tha allocation and de-allocation of 1D,2D,   *
+* contains template functions for the allocation and de-allocation of 1D,2D,   *
 * 3D, and 4D arrays of given size. The number of calls of the operator new     *
 * is D, the dimensionality. The Syntax is as follows:                          *
 *                                                                              *

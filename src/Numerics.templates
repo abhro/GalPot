@@ -30,7 +30,7 @@
 *                                                                              *
 * template<class S, class T>                                                   *
 * T polint(S *xa, T *ya, const int n, S x)                                     *
-*    polynom interpolation using n values: returns y(x) given x_i, y_i         *
+*    polynomial interpolation using n values: returns y(x) given x_i, y_i      *
 *                                                                              *
 * template<class S, class T>                                                   *
 * T polev(S x, S*xarr, T*yarr, const int n, const int m=4)                     *
@@ -845,7 +845,7 @@ template<class C, class S>
 S qbulir(C* o, S(C::*func)(S), const S a, const S b, const S eps_, S& err)
 //------------------------------------------------------------------------------
 // Quadrature program using the Bulirsch sequence and rational extrapolation.
-// The algorithm is puplished in Bulirsch & Stoer, Num. Math. 9, 271-278 (1967),
+// The algorithm is published in Bulirsch & Stoer, Num. Math. 9, 271-278 (1967),
 // where a routine in ALGOL is given. This routine is a straightforward
 // translation into C++.
 // CAUTION:
@@ -855,7 +855,7 @@ S qbulir(C* o, S(C::*func)(S), const S a, const S b, const S eps_, S& err)
 // INPUT:  o      object of class C
 //      func   pointer to member of object o: function to be integrated.
 //      a,b    lower and upper boundaries of the integration interval;
-//      eps    desired relativ accuracy;
+//      eps    desired relative accuracy;
 // OUTPUT: return approximated value for the integral;
 //      err    actual relative error of the return value.
 //------------------------------------------------------------------------------

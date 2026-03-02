@@ -33,8 +33,8 @@ public:
   KeplerPotential(double);
   double operator() (const double, const double) const;
   double operator() (const double, const double, double&, double&) const;
-  //double RfromLc(const double, double* = 0) const {return 0.;} // Not implimented yet
-  //double LfromRc(const double, double* = 0) const  {return 0.;} // Not implimented yet
+  //double RfromLc(const double, double* = 0) const {return 0.;} // Not implemented yet
+  //double LfromRc(const double, double* = 0) const {return 0.;} // Not implemented yet
   Frequencies KapNuOm(const double) const;
 };
 

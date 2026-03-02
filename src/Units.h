@@ -40,12 +40,12 @@
 * below, a const object                                                        *
 *       const Units U;                                                         *
 * is declared at the end of this file. This should be used by any user, e.g.   *
-* Units::kms refers to km/s in the basic units (1 km/s = 0.0010227299). This whole  *
-* construction (i) avoids global variables (apart from U) and hence potential  *
-* problems with the global name space, and (ii) ensures that nobody can change *
-* the values of the quantities (since U is const). Additionally, the construc- *
-* tion of further objects of type Units is disabled and will create a warning  *
-* on compilation and an error at run time.                                     *
+* Units::kms refers to km/s in the basic units (1 km/s = 0.0010227299).        *
+* This whole construction (i) avoids global variables (apart from U) and hence *
+* potential problems with the global name space, and (ii) ensures that nobody  *
+* can change the values of the quantities (since U is const). Additionally,    *
+* the construction of further objects of type Units is disabled and will       *
+* create a warning on compilation and an error at run time.                    *
 *                                                                              *
 *******************************************************************************/
 

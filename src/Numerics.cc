@@ -26,7 +26,7 @@ double qbulir(double(*func)(double), const double a, const double b,
               const double eps_, double& err)
 /*------------------------------------------------------------------------------
 Quadrature program using the Bulirsch sequence and rational extrapolation. The
-algorithm is puplished in Bulirsch & Stoer, Num. Math. 9, 271-278 (1967), where
+algorithm is published in Bulirsch & Stoer, Num. Math. 9, 271-278 (1967), where
 a routine in ALGOL is given. This routine is a straightforward translation into
 C++.
 CAUTION:
@@ -35,7 +35,7 @@ order) or periodic functions with period equal to the interval of integration
 or linear combinations of both.
 INPUT:  func   pointer to function to be integrated.
         a,b    lower and upper boundaries of the integration interval;
-        eps    desired relativ accuracy;
+        eps    desired relative accuracy;
 OUTPUT: return approximated value for the integral;
         err    actual relative error of the return value.
 ------------------------------------------------------------------------------*/

@@ -3,9 +3,9 @@
 *  findOrbit.cc                                                                *
 *                                                                              *
 *  C++ code written by Paul McMillan, 2007-                                    *
-*  School of Physics & Astronomy, University of Leicester                                          *
-*  address: University Road, Leicester                                     *
-*  e-mail:  paul.mcmillan@le.ac.uk                                                   *
+*  School of Physics & Astronomy, University of Leicester                      *
+*  address: University Road, Leicester                                         *
+*  e-mail:  paul.mcmillan@le.ac.uk                                             *
 *                                                                              *
 *******************************************************************************/
 
@@ -47,8 +47,8 @@ int main(int argc,char *argv[])
 
  out.open(argv[7]);
 
- // Note that it is possible to use any monotoically increasing or decreasing
- // set of values for the output, but this exaple is the most usual case - equal
+ // Note that it is possible to use any monotonically increasing or decreasing
+ // set of values for the output, but this example is the most usual case - equal
  // steps.
  dt   = atof(argv[8]);
  Tmax = atof(argv[9]);

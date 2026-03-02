@@ -82,7 +82,7 @@ public:
 };
 
 ////////////////////////////////////////////////////////////////////////////////
-// here are four implimentation of random distributions
+// here are four implementation of random distributions
 
 /**
    \brief Random number x with P(x) = 1/|b-a| for x in (a,b).

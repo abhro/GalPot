@@ -424,7 +424,7 @@ public:
   // potential of one of the models as shown in the following code fragment.
   //
   // ifstream from("Model.pot");        // file `Model.pot' contains the data
-  // GalaxyPotenial Phi(from);  // read from file and construct object
+  // GalaxyPotential Phi(from);         // read from file and construct object
   // from.close();                      // close file
 
   //  GalaxyPotential(std::string&);
