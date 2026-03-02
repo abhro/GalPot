@@ -17,3 +17,5 @@ Documentation.*
 !Documentation.tex
 !Documentation.pdf
 MCMC_MW.pot
+Manifest.toml
+JuliaManifest.toml
