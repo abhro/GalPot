@@ -5,7 +5,7 @@
 Combines multiple potentials into one.
 
 *                                                                              *
-* MultiPot.cc                                                                   *
+* MultiPot.cc                                                                  *
 *                                                                              *
 * C++ code written by Paul McMillan, 2014-
 *                                                                              *
@@ -60,8 +60,8 @@ double MultiPotential::operator() (const double R, const double z, double &dPdR,
 //     LcR=sqrt(R*R*R*dPR);
 //     if(LcR == L) return R;
 //     if((L< LcR && L>oldL) ||(L>LcR && L<oldL)){
-// 	R=(more)? exp(lR-0.5*dlR) : exp(lR+0.5*dlR);
-// 	return R;}
+//      R=(more)? exp(lR-0.5*dlR) : exp(lR+0.5*dlR);
+//      return R;}
 //     oldL=LcR;
 //   }
 

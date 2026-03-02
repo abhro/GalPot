@@ -39,9 +39,8 @@ public:
 };
 
 
-inline MultiPotential::MultiPotential(Potential **inPotList,
-				      const int np) :
-		      PotList(inPotList), npot(np)
+inline MultiPotential::MultiPotential(Potential **inPotList, const int np) :
+                      PotList(inPotList), npot(np)
 
 {
 

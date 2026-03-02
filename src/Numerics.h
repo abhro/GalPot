@@ -31,10 +31,9 @@ void LegendrePeven(double*,const double,const int);
 void dLegendrePeven(double*,double*,const double,const int);
 
 double qbulir(double(*)(double),const double,const double,const double,double&);
-inline double qbulir(double(*func)(double),const double a,const double b,
-		     const double eps)
-{ 
-    double err; 
+inline double qbulir(double(*func)(double),const double a,const double b, const double eps)
+{
+    double err;
     return qbulir(func,a,b,eps,err);
 }
 

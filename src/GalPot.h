@@ -46,14 +46,14 @@
 // About the unit system                                                       |
 // The unit system used throughout the classes and functions defined here and  |
 // in included files is based on the following basic units                     |
-// 	unit of length:		1 kilo parsec (kpc)                            |
-//	unit of time:		1 mega year   (Myr)                            |
-// 	unit of mass:		1 solar mass  (Msun)                           |
+//      unit of length:         1 kilo parsec (kpc)                            |
+//      unit of time:           1 mega year   (Myr)                            |
+//      unit of mass:           1 solar mass  (Msun)                           |
 // This implies the following dimensions                                       |
 //                                                                             |
 // quantity        dimension / seize                using other units          |
 //-----------------------------------------------------------------------------+
-// angular vel.  1 Myr^-1	                   = 977.775320024919 km/s/kpc |
+// angular vel.  1 Myr^-1                          = 977.775320024919 km/s/kpc |
 // velocity      1 kpc/Myr                         = 977.775320024919 km/s     |
 // action/mass   1 kpc^2/Myr                       = 977.775320024919 kpc*km/s |
 // potential     1 kpc^2/Myr^2                     = 956044.576449833 (km/s)^2 |
@@ -79,14 +79,14 @@
   //----------------------------------------------------------------------------
 
 #ifdef GalPot_cc
-const int LMAX=80;		// maximum l for the multipole expansion
+const int LMAX=80;              // maximum l for the multipole expansion
 #endif
 
 //----------------------------------------------------------------------------
 // Set some values used as default in the constructors below
 //----------------------------------------------------------------------------
 
-const int    NRAD=201;	      // DEFAULT number of radial points in Multipole
+const int    NRAD=201;        // DEFAULT number of radial points in Multipole
 const double RMIN=1.e-4*Units::kpc,// DEFAULT min radius of logarithmic radial grid
              RMAX=1.e3*Units::kpc; // DEFAULT max radius of logarithmic radial grid
 //----------------------------------------------------------------------------
@@ -101,8 +101,8 @@ const double RMIN=1.e-4*Units::kpc,// DEFAULT min radius of logarithmic radial g
 // DiskPar[0]   is the surface density normalisation Sigma_0 [Msun/kpc^2]
 // DiskPar[1]   is the scale length R_d [kpc]
 // DiskPar[2]   is the scale height h [kpc]. For h<0 an isothermal (sech^2)
-//		  profile is used, for h>0 an exponential one, and for h=0 the
-//		  disk is infinitesimal thin.
+//                profile is used, for h>0 an exponential one, and for h=0 the
+//                disk is infinitesimal thin.
 // DiskPar[3]   is the inner cut-off radius R_m [kpc]
 // DiskPar[4]   is eps. A term eps*cos(pi*R/R_d) is added to the exponent.
 //
@@ -159,15 +159,15 @@ inline void DiskAnsatz::DescribePot(ostream& to) const
     to<< "potential due to mass density:\n "
       <<std::setprecision(3)<<S0<<Units::mass_unit<<'/'<<Units::length_unit<<"^2 Exp{-";
     if(hollow)
-	to<<std::setprecision(3)<<R0<<Units::length_unit<<"/R-";
+        to<<std::setprecision(3)<<R0<<Units::length_unit<<"/R-";
     to<<"R/"<<std::setprecision(3)<<Rd<<Units::length_unit;
     if(isothermal)
-	to<<"} sech^2{z/"
-	  <<std::setprecision(3)<<(2*zd)<<Units::length_unit<<"}/"
-	  <<std::setprecision(3)<<(4*zd)<<Units::length_unit;
+        to<<"} sech^2{z/"
+          <<std::setprecision(3)<<(2*zd)<<Units::length_unit<<"}/"
+          <<std::setprecision(3)<<(4*zd)<<Units::length_unit;
     else if(!thin)
-	to<<"-|z|/"<<std::setprecision(3)<<zd<<Units::length_unit<<"}/"
-	  <<std::setprecision(3)<<(2*zd)<<Units::length_unit;
+        to<<"-|z|/"<<std::setprecision(3)<<zd<<Units::length_unit<<"}/"
+          <<std::setprecision(3)<<(2*zd)<<Units::length_unit;
     to<<'\n';
 }
 //////////////////////////////////////////////////////////////////////////////
@@ -223,7 +223,7 @@ inline double Disks::operator() (const double R, const double z) const {
   return pot;
 }
 inline double Disks::operator() (const double R, const double z,
-				 double& dR, double& dz) const {
+                                 double& dR, double& dz) const {
   if(nd==0) {
     dR = 0.;
     dz = 0.;
@@ -280,7 +280,7 @@ public:
   void   DescribePot     (ostream&) const;
 };
 inline double SpheroidDensity::Residual(const double r, const double st,
-					const double ct) const {
+                                        const double ct) const {
   return Units::fPiG * Density(r*st,r*ct);
 }
 inline SphrPar SpheroidDensity::parameter() const {
@@ -296,10 +296,10 @@ inline SphrPar SpheroidDensity::parameter() const {
 inline void SpheroidDensity::DescribePot(ostream& to) const
 {
     to<<" Spheroid: rh0="<<rh0
-	       <<", c/a="<<q
-	       <<", gamma="<<gam
-	       <<", beta="<<bet
-	       <<", r0="<<r0;
+               <<", c/a="<<q
+               <<", gamma="<<gam
+               <<", beta="<<bet
+               <<", r0="<<r0;
     if(rci) to<<", rcut="<<rcut;
     to<<'\n';
 }
@@ -345,7 +345,7 @@ inline double Spheroids::Density(const double a, const double b) const {
   return R;
 }
 inline double Spheroids::Residual(const double a, const double b,
-				  const double c) const {
+                                  const double c) const {
   if(ns==0) return 0.;
    double R=0.;
   for( SpheroidDensity *p=S; p<Sup; p++) R += p->Residual(a,b,c);
@@ -368,27 +368,27 @@ private:
   double      *X[2], **Y[3], **Z[4];
   void        AllocArrays();
   void        setup(const double, const double,       // r_min, r_max
-		    const double, const double,       // gamma, beta
-		    PotResidual const*);              // providing rho(x)
+                    const double, const double,       // gamma, beta
+                    PotResidual const*);              // providing rho(x)
 public:
   Multipole (const int,                               // points on log grid
-	     const double, const double,              // r_min, r_max
-	     const double, const double,              // gamma, beta
-	     PotResidual const*,                      // providing rho(x)
-	     const int =1);                           // routines LfromRc...
+             const double, const double,              // r_min, r_max
+             const double, const double,              // gamma, beta
+             PotResidual const*,                      // providing rho(x)
+             const int =1);                           // routines LfromRc...
   void reset(const double, const double,              // r_min, r_max
-	     const double, const double,              // gamma, beta
-	     PotResidual const*,                      // providing rho(x)
-	     const int =1);                           // routines LfromRc...
+             const double, const double,              // gamma, beta
+             PotResidual const*,                      // providing rho(x)
+             const int =1);                           // routines LfromRc...
   ~Multipole();
   double      operator()(const double,const double,const double, double* =0)
     const;
-  double      vcsquare  (const double)		const;
-  double      vcsquare  (const double, double&)	const;
-  double      RfromLc   (const double, double* =0)	const;
-  double      LfromRc   (const double, double* =0) 	const;
+  double      vcsquare  (const double)          const;
+  double      vcsquare  (const double, double&) const;
+  double      RfromLc   (const double, double* =0)      const;
+  double      LfromRc   (const double, double* =0)      const;
   double      Laplace   (const double, const double)  const;
-  Frequencies      kapnuom   (const double)		const;
+  Frequencies      kapnuom   (const double)             const;
 };
 inline double Multipole::vcsquare(const double R) const
 {
@@ -401,9 +401,9 @@ inline double Multipole::vcsquare(const double R) const
 
 
 class GalaxyPotential : public  PotResidual,
-			public  Potential,
-			private Disks,
-			private Spheroids {
+                        public  Potential,
+                        private Disks,
+                        private Spheroids {
 private:
 
   Multipole M;
@@ -423,25 +423,25 @@ public:
   // constructor from input stream. Use this constructor to establish the
   // potential of one of the models as shown in the following code fragment.
   //
-  // ifstream from("Model.pot"); 	// file `Model.pot' contains the data
-  // GalaxyPotenial Phi(from);	// read from file and construct object
-  // from.close();			// close file
+  // ifstream from("Model.pot");        // file `Model.pot' contains the data
+  // GalaxyPotenial Phi(from);  // read from file and construct object
+  // from.close();                      // close file
 
   //  GalaxyPotential(std::string&);
   // constructor from file with name given in string.
 
 
-  GalaxyPotential(const int, const DiskPar*,	// No & parameters of disks
-		  const int, const SphrPar*,	// No & parameters of spheroids
-		  const double = RMIN,	// min radius of radial grid
-		  const double = RMAX, 	// max radius of radial grid
-		  const int    = NRAD);	// No of radial grid points
+  GalaxyPotential(const int, const DiskPar*,    // No & parameters of disks
+                  const int, const SphrPar*,    // No & parameters of spheroids
+                  const double = RMIN,  // min radius of radial grid
+                  const double = RMAX,  // max radius of radial grid
+                  const int    = NRAD); // No of radial grid points
   // constructor from parameters. See above for the meaning of the parameters
 
-  void   reset   (const int, const DiskPar*,	// No & parameters of disks
-		  const int, const SphrPar*, 	// No & parameters of spheroids
-		  const double = RMIN,	// min radius of radial grid
-		  const double = RMAX);	// max radius of radial grid
+  void   reset   (const int, const DiskPar*,    // No & parameters of disks
+                  const int, const SphrPar*,    // No & parameters of spheroids
+                  const double = RMIN,  // min radius of radial grid
+                  const double = RMAX); // max radius of radial grid
   // resets to new parameters (arguments as the above constructor), the
   // number of radial grid points remains fixed at the old value
 
@@ -536,8 +536,8 @@ public:
 // Constructors and related (all inline)
 //////////////////////////////////////////////////////////////////////////////
 inline double GalaxyPotential::Residual(const double a,
-					const double b,
-					const double c) const {
+                                        const double b,
+                                        const double c) const {
   return Disks::Residual(a,b,c) + Spheroids::Residual(a,b,c);
 }
 //----------------------------------------------------------------------------
@@ -548,17 +548,17 @@ inline GalaxyPotential::GalaxyPotential(std::istream &from)
 {}
 //----------------------------------------------------------------------------
 inline GalaxyPotential::GalaxyPotential(const int Nd, const DiskPar* pd,
-					const int Ns, const SphrPar* ps,
-					const double rmin, const double rmax,
-					const int k)
+                                        const int Ns, const SphrPar* ps,
+                                        const double rmin, const double rmax,
+                                        const int k)
   : Disks(Nd,pd),
     Spheroids(Ns,ps),
     M(k,rmin,rmax,Spheroids::gamma(),Spheroids::beta(),this)
 {}
 //----------------------------------------------------------------------------
 inline void GalaxyPotential::reset(const int Nd, const DiskPar* pd,
-				   const int Ns, const SphrPar* ps,
-				   const double rmin, const double rmax) {
+                                   const int Ns, const SphrPar* ps,
+                                   const double rmin, const double rmax) {
   Disks::reset(Nd,pd);
   Spheroids::reset(Ns,ps);
   M.reset(rmin,rmax,Spheroids::gamma(),Spheroids::beta(),this);

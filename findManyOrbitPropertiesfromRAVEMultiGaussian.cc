@@ -70,11 +70,11 @@ int main(int argc,char *argv[])
   if(argc<4) {
     cerr << "Input: input_file n_tests output_file\n";
     cerr << "input_file is an ascii file giving position and motion in equatorial coordinates, with uncertainties.\n"
-	 << "distance being a multi-Gaussian fit to the distance modulus pdf, as per RAVE DR4/5 (see DR5 paper).\n"
-	 << "n_tests is number of Monte Carlo samples used per star\n"
-	 << "file contains:"
-	 << "\tnumber_of_Gaussians_fit mean_1 sig_1 frac_1 mean_2 sig_2 frac_2 mean_3 sig_3 frac_3 "
-	 << "RA RA_err DEC DEC_err v_los v_los_err mu_a* mu_a*_err mu_d mu_d_err\n";
+         << "distance being a multi-Gaussian fit to the distance modulus pdf, as per RAVE DR4/5 (see DR5 paper).\n"
+         << "n_tests is number of Monte Carlo samples used per star\n"
+         << "file contains:"
+         << "\tnumber_of_Gaussians_fit mean_1 sig_1 frac_1 mean_2 sig_2 frac_2 mean_3 sig_3 frac_3 "
+         << "RA RA_err DEC DEC_err v_los v_los_err mu_a* mu_a*_err mu_d mu_d_err\n";
     cerr << "\t( angles in degrees, velocity in km/s, proper motion in mas/yr)\n";
     cerr << " Output is in kpc (distances), km^2/s^2 (energy), kpc km/s (angular momentum)\n";
     cerr << " Quoted values are medians from Monte Carlo sample, with minus and plus 1sigma values found from 15.87 and 84.13 percentiles.\n";
@@ -123,68 +123,66 @@ int main(int argc,char *argv[])
       << "\nmean_1 sig_1 frac_1 " << MGpar[0] << ' ' << MGpar[1]<< ' ' << MGpar[2]
       << "\nmean_2 sig_2 frac_2 "<< MGpar[3] << ' ' << MGpar[4]<< ' ' << MGpar[5]
       <<"\nmean_3 sig_3 frac_3 "<< MGpar[6] << ' ' << MGpar[7]<< ' ' << MGpar[8]
-   	 << "\nRA RA_err DEC DEC_err"
+         << "\nRA RA_err DEC DEC_err"
      << EquatorialCoords[1] << ' '<< EquatorialCoordsErr[1]<< ' '<< EquatorialCoords[2] << ' '<< EquatorialCoordsErr[2]
      << "\nv_los v_los_err " << EquatorialCoords[3] << ' '<< EquatorialCoordsErr[3]
      << "\nmu_a* mu_a*_err mu_d mu_d_err"
      << EquatorialCoords[4] << ' '<< EquatorialCoordsErr[4]<< ' ' << EquatorialCoords[5] << ' '<< EquatorialCoordsErr[5]
      << "\n"; */
       for(int i=0;i!=n_tests;i++) {
-	// Add uncertainties
-	if(nMG==1) dm = MGpar[0] + MGpar[1]*GaussianRandom();
-	else {
-	  double which = UniformRandom();
-	  if(which<=MGpar[2]) dm = MGpar[0] + MGpar[1]*GaussianRandom();
-	  else if(nMG<3 || which <= MGpar[2] + MGpar[5])  dm = MGpar[3] + MGpar[4]*GaussianRandom();
-	  else dm = MGpar[6] + MGpar[7]*GaussianRandom();
-	}
+        // Add uncertainties
+        if(nMG==1) dm = MGpar[0] + MGpar[1]*GaussianRandom();
+        else {
+          double which = UniformRandom();
+          if(which<=MGpar[2]) dm = MGpar[0] + MGpar[1]*GaussianRandom();
+          else if(nMG<3 || which <= MGpar[2] + MGpar[5])  dm = MGpar[3] + MGpar[4]*GaussianRandom();
+          else dm = MGpar[6] + MGpar[7]*GaussianRandom();
+        }
 
-	EquatorialCoordsTmp[0] = powf(10.,dm/5. - 2.);
-	for(int j=1;j!=6;j++)
-	  EquatorialCoordsTmp[j] = EquatorialCoords[j]
-	    + EquatorialCoordsErr[j] * GaussianRandom();
+        EquatorialCoordsTmp[0] = powf(10.,dm/5. - 2.);
+        for(int j=1;j!=6;j++)
+          EquatorialCoordsTmp[j] = EquatorialCoords[j]
+            + EquatorialCoordsErr[j] * GaussianRandom();
 
-	EquatorialCoordsTmp[0] *= Units::kpc;
-	EquatorialCoordsTmp[1] *= Units::degree;
-	EquatorialCoordsTmp[2] *= Units::degree;
-	EquatorialCoordsTmp[3] *= Units::kms;
-	EquatorialCoordsTmp[4] *= Units::masyr;
-	EquatorialCoordsTmp[5] *= Units::masyr;
+        EquatorialCoordsTmp[0] *= Units::kpc;
+        EquatorialCoordsTmp[1] *= Units::degree;
+        EquatorialCoordsTmp[2] *= Units::degree;
+        EquatorialCoordsTmp[3] *= Units::kms;
+        EquatorialCoordsTmp[4] *= Units::masyr;
+        EquatorialCoordsTmp[5] *= Units::masyr;
 
-	XV = OC.GCYfromHEQ(EquatorialCoordsTmp);
+        XV = OC.GCYfromHEQ(EquatorialCoordsTmp);
 
-	OI.setup(XV);
-	if(OI.run() == 0) {
-	  MinR.push_back(OI.MinR/Units::kpc);
-	  MaxR.push_back(OI.MaxR/Units::kpc);
-	  Maxz.push_back(OI.Maxz/Units::kpc);
-	  Minr.push_back(OI.Minr/Units::kpc);
-	  Maxr.push_back(OI.Maxr/Units::kpc);
-	  MeanR.push_back(OI.MeanR/Units::kpc);
-	  Energy.push_back(OI.Energy/(Units::kms*Units::kms));
-	  AngMom.push_back(OI.Lz/(Units::kpc*Units::kms));
-	} else {
+        OI.setup(XV);
+        if(OI.run() == 0) {
+          MinR.push_back(OI.MinR/Units::kpc);
+          MaxR.push_back(OI.MaxR/Units::kpc);
+          Maxz.push_back(OI.Maxz/Units::kpc);
+          Minr.push_back(OI.Minr/Units::kpc);
+          Maxr.push_back(OI.Maxr/Units::kpc);
+          MeanR.push_back(OI.MeanR/Units::kpc);
+          Energy.push_back(OI.Energy/(Units::kms*Units::kms));
+          AngMom.push_back(OI.Lz/(Units::kpc*Units::kms));
+        } else {
     // This line should never be reached (change 2026)
-	  BadPoints++;
-	  // Orbit unbound. Put in some sensible values
-	  MinR.push_back(XV[0]/Units::kpc);
-	  MaxR.push_back(1.e10);
-	  Maxz.push_back(1.e10);
-	  Minr.push_back(sqrt(XV[0]*XV[0]+XV[1]*XV[1])/Units::kpc);
-	  Maxr.push_back(1.e10);
-	  MeanR.push_back(1.e10);
-	  Energy.push_back(OI.Energy/(Units::kms*Units::kms));
-	  AngMom.push_back(OI.Lz/(Units::kpc*Units::kms));
-	}
+          BadPoints++;
+          // Orbit unbound. Put in some sensible values
+          MinR.push_back(XV[0]/Units::kpc);
+          MaxR.push_back(1.e10);
+          Maxz.push_back(1.e10);
+          Minr.push_back(sqrt(XV[0]*XV[0]+XV[1]*XV[1])/Units::kpc);
+          Maxr.push_back(1.e10);
+          MeanR.push_back(1.e10);
+        }
       }
       // when finished
       // Output median and pm 1sigma equivalent percentilmes
 
       if(BadPoints>=DangerPoint) {
-	std::cerr << "WARNING: Output unreliable\t"
-		  << "Too many unbound orbits for star " << count
+        std::cerr << "WARNING: Output unreliable\t"
+                  << "Too many unbound orbits for star " << count
       << " with coordinates "
-		  << EquatorialCoords << "\n";
+                  << EquatorialCoords << "\n";
       }
 
       OutputMedianAndUpperLower(output,MinR);

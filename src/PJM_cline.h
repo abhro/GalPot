@@ -5,7 +5,7 @@
 *                                                                              *
 * PJM_cline.h                                                                  *
 *                                                                              *
-* C++ code written by Paul McMillan, 2011-   
+* C++ code written by Paul McMillan, 2011-
 *                                                                              *
 *       Routines to work with the command line                                 *
 *                                                                              *
@@ -85,11 +85,11 @@ inline bool parse_comm_line(char* cl_argv,const string test,string &out) {
 
 
 inline string my_get_rootname(char* input) {
-  string tmpstr=string(input); 
+  string tmpstr=string(input);
   int tmpi;
-  
+
   for(int i=tmpstr.size();tmpstr[i]!='.' && i>0;i--) tmpi=i-1;
-  
+
   if(tmpi) return tmpstr.substr(0,tmpi);
   else     return tmpstr;
 }
@@ -101,8 +101,8 @@ inline int split_comma_val_input(char* input) {
   cerr << str.substr(0,comma1) << ",";
   nout++;
   while(comma1 != string::npos) {
-    comma2 = str.find(',',comma1+1);  
-    cerr << str.substr(comma1+1,comma2-comma1-1).c_str() << ","; 
+    comma2 = str.find(',',comma1+1);
+    cerr << str.substr(comma1+1,comma2-comma1-1).c_str() << ",";
     comma1 = comma2;
     nout++;
   }
@@ -119,11 +119,11 @@ inline int split_comma_val_input(char* input, double* table, const int ntabmax)
   table[nout++] = atof(str.substr(0,comma1).c_str());
 
   while(comma1 != string::npos && nout != ntabmax) {
-    comma2 = str.find(',',comma1+1);  
-    table[nout++] = atof(str.substr(comma1+1,comma2-comma1-1).c_str()); 
+    comma2 = str.find(',',comma1+1);
+    table[nout++] = atof(str.substr(comma1+1,comma2-comma1-1).c_str());
     comma1 = comma2;
   }
-  if(comma1 != string::npos) { 
+  if(comma1 != string::npos) {
     cerr << "More comma separated command line arguments than capacity\n";
   }
   return nout;
@@ -138,11 +138,11 @@ inline int split_comma_val_input(char* input, float* table, const int ntabmax)
   table[nout++] = atof(str.substr(0,comma1).c_str());
 
   while(comma1 != string::npos && nout != ntabmax) {
-    comma2 = str.find(',',comma1+1);  
-    table[nout++] = atof(str.substr(comma1+1,comma2-comma1-1).c_str()); 
+    comma2 = str.find(',',comma1+1);
+    table[nout++] = atof(str.substr(comma1+1,comma2-comma1-1).c_str());
     comma1 = comma2;
   }
-  if(comma1 != string::npos) { 
+  if(comma1 != string::npos) {
     cerr << "More comma separated command line arguments than capacity\n";
   }
   return nout;
@@ -157,11 +157,11 @@ inline int split_comma_val_input(char* input, int* table, const int ntabmax)
   table[nout++] = atoi(str.substr(0,comma1).c_str());
 
   while(comma1 != string::npos && nout != ntabmax) {
-    comma2 = str.find(',',comma1+1);  
-    table[nout++] = atoi(str.substr(comma1+1,comma2-comma1-1).c_str()); 
+    comma2 = str.find(',',comma1+1);
+    table[nout++] = atoi(str.substr(comma1+1,comma2-comma1-1).c_str());
     comma1 = comma2;
   }
-  if(comma1 != string::npos) { 
+  if(comma1 != string::npos) {
     cerr << "More comma separated command line arguments than capacity\n";
   }
   return nout;

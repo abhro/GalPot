@@ -15,16 +15,16 @@
 
 #include <ctime>
 
-int main(int argc,char *argv[])  
+int main(int argc,char *argv[])
 {
 
   ifstream file,data;
   ofstream output;
   string potfile = "pot/PJM16_best.Tpot",line;
   Potential *Phi;
- 
 
- // Read potential from file 
+
+ // Read potential from file
   file.open(potfile.c_str());
   if(!file){
     cerr << "Input file does not exist. Filename: " << potfile << "\n";
@@ -32,7 +32,7 @@ int main(int argc,char *argv[])
   }
   Phi = new GalaxyPotential(file);
   file.close();
-  
+
   if(argc<3) {
     cerr << "Input: input_file output_file\n";
     cerr << "input_file must contain columns: R z v_R v_z v_phi\n";
@@ -52,7 +52,7 @@ int main(int argc,char *argv[])
   // Open for output
   output.open(argv[2]);
 
-  // Write header 
+  // Write header
   output << "#MinR MaxR Maxz Minr Maxr MeanR Energy AngMom\n" << std::flush;
 
   // Setup class
@@ -65,10 +65,10 @@ int main(int argc,char *argv[])
     // Skip commented lines (which start with #)
     if(line[0] != '#') {
       std::stringstream ss(line);
-      
+
       for(int i=0;i!=5;i++)
-	if(i<2) ss >> XV[i];
-	else ss >> XV[i+1];
+        if(i<2) ss >> XV[i];
+        else ss >> XV[i+1];
        // Convert input to code coordinates
       XV[0] *= Units::kpc;
       XV[1] *= Units::kpc;
@@ -76,19 +76,19 @@ int main(int argc,char *argv[])
       XV[3] *= Units::kms;
       XV[4] *= Units::kms;
       XV[5] *= Units::kms;
-      
+
       OI.setup(XV);
       // run integration
       if(OI.run() == 0) {
       // Output results if successful
-	output << OI.MinR<< ' ' << OI.MaxR<< ' ' << OI.Maxz<< ' '
-	       << OI.Minr<< ' ' << OI.Maxr<< ' ' << OI.MeanR<< ' '
-	       << OI.Energy/(Units::kms*Units::kms)<< ' '
-	       << OI.Lz/(Units::kms*Units::kpc) << '\n' << std::flush;
+        output << OI.MinR<< ' ' << OI.MaxR<< ' ' << OI.Maxz<< ' '
+               << OI.Minr<< ' ' << OI.Maxr<< ' ' << OI.MeanR<< ' '
+               << OI.Energy/(Units::kms*Units::kms)<< ' '
+               << OI.Lz/(Units::kms*Units::kpc) << '\n' << std::flush;
       } else {
         // This line should never be reached (change 2026)
-	      cerr << "Failure for line: " << line
-	     << "\nEnergy=" << OI.Energy/(Units::kms*Units::kms) << '\n';
+        cerr << "Failure for line: " << line
+             << "\nEnergy=" << OI.Energy/(Units::kms*Units::kms) << '\n';
       }
     }
 

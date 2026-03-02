@@ -31,28 +31,28 @@ const double LogofTenInv = 0.434294481903251827651128918917;
 // (2) functions
 ////////////////////////////////////////////////////////////////////////////////
 
-void   MathError	(const char*);	// writes out error message & exits
-void   MathWarning	(const char*);	// writes out warning message
+void   MathError        (const char*);  // writes out error message & exits
+void   MathWarning      (const char*);  // writes out warning message
 
 //==============================================================================
 // miscellaneous
 //==============================================================================
 
-double SphVol(const int);	// volume of the unit sphere in n dimensions
+double SphVol(const int);       // volume of the unit sphere in n dimensions
 bool is_integral(const double); // Is it an integer?
 //==============================================================================
 // Log's and Exp's (inlines)
 //==============================================================================
 
 inline double ln(const double x)
-	{ if(x<=0) MathError("ln() of argument <= 0");
-	  return log(x); }
+        { if(x<=0) MathError("ln() of argument <= 0");
+          return log(x); }
 inline double ld(const double x)
-	{ if(x<=0) MathError("ld() of argument <= 0");
-	  return LogofTwoInv*log(x); }
+        { if(x<=0) MathError("ld() of argument <= 0");
+          return LogofTwoInv*log(x); }
 inline double lg(const double x)
-	{ if(x<=0) MathError("lg() of argument <= 0");
-	  return log10(x); }
+        { if(x<=0) MathError("lg() of argument <= 0");
+          return log10(x); }
 inline double Tento(const double x) { return exp(LogofTen*x); }
 inline double Twoto(const double x) { return exp(LogofTwo*x); }
 
@@ -72,18 +72,18 @@ complex<double> lncosh(const complex<double>&);
 //==============================================================================
 
 double LogGamma(const double);
-	// returns Log[Gamma[x]]
+        // returns Log[Gamma[x]]
 double GammaP(const double, const double);
-	// returns P[a,x] = Int[Exp[-t] t^(a-1),{t,0,x}]
+        // returns P[a,x] = Int[Exp[-t] t^(a-1),{t,0,x}]
 double LogGamma(const double, const double);
-	// returns Log[Gamma[a,x]] = Log[ Gamma[x] * Q[a,x] ]   
-	// where Q[a,x] = Int[Exp[-t] t^(a-1),{t,x,oo}]
+        // returns Log[Gamma[a,x]] = Log[ Gamma[x] * Q[a,x] ]
+        // where Q[a,x] = Int[Exp[-t] t^(a-1),{t,x,oo}]
 double Loggamma(const double, const double);
-	// returns Log[Gamma[a,x]] = Log[ Gamma[x] * P[a,x] ]   
-	// where P[a,x] = Int[Exp[-t] t^(a-1),{t,0,x}]
+        // returns Log[Gamma[a,x]] = Log[ Gamma[x] * P[a,x] ]
+        // where P[a,x] = Int[Exp[-t] t^(a-1),{t,0,x}]
 #ifdef __COMPLEX__
 complex<double> LogGamma(const complex<double>);
-	// return Log[Gamma[x]]
+        // return Log[Gamma[x]]
 #endif
 
 //==============================================================================
@@ -91,14 +91,14 @@ complex<double> LogGamma(const complex<double>);
 //==============================================================================
 
 double En(const int, const double);
-	// returns the exponential integral E_n(x)
+        // returns the exponential integral E_n(x)
 double Ei(const double);
-	// returns the exponential integral Ei(x)
+        // returns the exponential integral Ei(x)
 
 /*
 // Inverse error function
 double InvErf(const double);
-	// returns y such that erf(y)=x, not quite cheap
+        // returns y such that erf(y)=x, not quite cheap
 */
 
 //==============================================================================
@@ -106,29 +106,29 @@ double InvErf(const double);
 //==============================================================================
 
 double J0(const double);
-	// return the Bessel function J_0(x)
+        // return the Bessel function J_0(x)
 double J1(const double);
-	// return the Bessel function J_1(x)
+        // return the Bessel function J_1(x)
 double Jn(const int, const double);
-	// return the Bessel function J_n(x)
+        // return the Bessel function J_n(x)
 double Y0(const double);
-	// return the Bessel function Y_0(x) also known as N_0(x) [GR]
+        // return the Bessel function Y_0(x) also known as N_0(x) [GR]
 double Y1(const double);
-	// return the Bessel function Y_1(x) also known as N_1(x) [GR]
+        // return the Bessel function Y_1(x) also known as N_1(x) [GR]
 double Yn(const int, const double);
-	// return the Bessel function Y_n(x) also known as N_n(x) [GR]
+        // return the Bessel function Y_n(x) also known as N_n(x) [GR]
 double I0(const double);
-	// return the modified Bessel function I_0(x)
+        // return the modified Bessel function I_0(x)
 double I1(const double);
-	// return the modified Bessel function I_1(x)
+        // return the modified Bessel function I_1(x)
 double In(const int, const double);
-	// return the modified Bessel function I_n(x)
+        // return the modified Bessel function I_n(x)
 double K0(const double);
-	// return the modified Bessel function K_0(x)
+        // return the modified Bessel function K_0(x)
 double K1(const double);
-	// return the modified Bessel function K_1(x)
+        // return the modified Bessel function K_1(x)
 double Kn(const int, const double);
-	// return the modified Bessel function K_n(x)
+        // return the modified Bessel function K_n(x)
 
 //==============================================================================
 // orthogonal polynomials
@@ -137,17 +137,17 @@ double Kn(const int, const double);
 // Hermite polynomials
 
 double HermiteH(const int, const double);
-	// returns the nth Hermite polynomial
+        // returns the nth Hermite polynomial
 void HermiteH(const int, const double, double*);
-	// evaluates the Hermite polynomials 0 to n
+        // evaluates the Hermite polynomials 0 to n
 void NormSqHermite(const int, double*);
-	// gives the inverse squared normalization constants for the H_n(x):
-	// Int dx Exp[-x^2] H_n(x) H_m(x) = N_n delta_{nm}
+        // gives the inverse squared normalization constants for the H_n(x):
+        // Int dx Exp[-x^2] H_n(x) H_m(x) = N_n delta_{nm}
 double HermiteH_normalized(const int, const double);
-	// returns the nth Hermite polynomial
-	// normalized to be orthonormal w.r.t. the weight function exp(-x^2)
+        // returns the nth Hermite polynomial
+        // normalized to be orthonormal w.r.t. the weight function exp(-x^2)
 void HermiteH_normalized(const int, const double, double*);
-	// evaluates the Hermite polynomials 0 to n
-	// normalized to be orthonormal w.r.t. the weight function exp(-x^2)
+        // evaluates the Hermite polynomials 0 to n
+        // normalized to be orthonormal w.r.t. the weight function exp(-x^2)
 
 #endif

@@ -13,7 +13,7 @@ double KeplerPotential::operator() (const double R, const double z) const
 }
 
 double KeplerPotential::operator() (const double R, const double z, double& dPdR,
-			       double& dPdz) const
+                               double& dPdz) const
 {
   double rsq = R*R+z*z,
     r = sqrt(rsq), ir = 1./r,
@@ -27,7 +27,7 @@ double KeplerPotential::operator() (const double R, const double z, double& dPdR
 
 Frequencies KeplerPotential::KapNuOm(const double R) const
 {
-  
+
   double tmp = sqrt(GM/(R*R*R));
 
   Frequencies epi = tmp; // all three components equal

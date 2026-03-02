@@ -1,7 +1,7 @@
 /***************************************************************************//**
 \file Random.h
 \brief Contains base class RandomNumberGenerator and classes Random3 Sobol
-  RandomDeviate Uniform	Gaussian Exponential ExpDisk.
+  RandomDeviate Uniform Gaussian Exponential ExpDisk.
 Basically all you need to generate random numbers.
 
 *                                                                              *
@@ -28,15 +28,15 @@ Basically all you need to generate random numbers.
 
 #include <algorithm>
 ////////////////////////////////////////////////////////////////////////////////
-/** \brief    base class for random number generators	       */
+/** \brief    base class for random number generators          */
 class RandomNumberGenerator {
 public:
     virtual double RandomDouble()        = 0;
     void   RandomDouble(double& x) { x = RandomDouble(); }
-    double operator()  () 	   { return RandomDouble(); }
+    double operator()  ()          { return RandomDouble(); }
     void   operator()  (double& x) { RandomDouble(x); }
     //virtual ~RandomNumberGenerator();
-}; 
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ public:
     virtual double operator() () = 0;
     virtual double value      (const double) const = 0;
     //virtual ~RandomDeviate();
-}; 
+};
 
 ////////////////////////////////////////////////////////////////////////////////
 // here are two implementation of random number generators
@@ -77,7 +77,7 @@ public:
     Sobol(const int=-1, const int=0);
     virtual ~Sobol();
     virtual double RandomDouble();
-	    void   Reset       ()   { ix = in = 0; }
+            void   Reset       ()   { ix = in = 0; }
             int    actual      ()   { return actl; }
 };
 
@@ -85,17 +85,17 @@ public:
 // here are four implimentation of random distributions
 
 /**
-   \brief Random number x with P(x) = 1/|b-a| for x in (a,b). 
+   \brief Random number x with P(x) = 1/|b-a| for x in (a,b).
    Default a=0,b=1. Requires an input pointer to RandomNumberGenerator.
  */
 class Uniform : public RandomDeviate {
 // gives x uniformly in [a,b]
 private:
     RandomNumberGenerator &r;
-    double 	a,b,ba;
+    double      a,b,ba;
 public:
-    Uniform(RandomNumberGenerator* R, 		    // random number generator
-	    const double A=0., const double B=1.)   // a,b
+    Uniform(RandomNumberGenerator* R,               // random number generator
+            const double A=0., const double B=1.)   // a,b
       : r(*R), a(std::min(A,B)), b(std::max(A,B)), ba(b-a) {}
     double lower_bound() { return a; }
     double upper_bound() { return b; }
@@ -104,20 +104,20 @@ public:
 };
 
 /**
-\brief  Random number x with P(x) = Exp[-x^2/(2 sigma^2)]; x in [-oo,oo]. 
-Default sigma=1.  Requires two input pointers to RandomNumberGenerator. 
+\brief  Random number x with P(x) = Exp[-x^2/(2 sigma^2)]; x in [-oo,oo].
+Default sigma=1.  Requires two input pointers to RandomNumberGenerator.
 
 */
 class Gaussian : public RandomDeviate {
 // gives x in [-oo,oo] with probability proportional to exp[-x^2/(2 sigma^2)]
 private:
-    int    	iset;
-    double 	sig, norm, gset;
+    int         iset;
+    double      sig, norm, gset;
     RandomNumberGenerator *R1, *R2;
 public:
-    Gaussian(RandomNumberGenerator*, 		// 1st random number generator
-    	     RandomNumberGenerator*,  		// 2nd random number generator
-	     const double=1.);			// sigma
+    Gaussian(RandomNumberGenerator*,            // 1st random number generator
+             RandomNumberGenerator*,            // 2nd random number generator
+             const double=1.);                  // sigma
     double operator() ();
     double sigma   () { return sig; }
     double value(const double) const;
@@ -125,7 +125,7 @@ public:
 
 
 /**
-   \brief	Random number x with P(x) = Exp[-x/a]; x in [0,oo) 
+   \brief       Random number x with P(x) = Exp[-x/a]; x in [0,oo)
    Default a=1. Requires an input pointer to RandomNumberGenerator.
 */
 class Exponential : public RandomDeviate {
@@ -134,9 +134,9 @@ private:
     double alf;
     RandomNumberGenerator *Rn;
 public:
-    Exponential(RandomNumberGenerator* R,	// random number generator
-                const double a=1.)		// alpha
-	: alf(a), Rn(R) {}
+    Exponential(RandomNumberGenerator* R,       // random number generator
+                const double a=1.)              // alpha
+        : alf(a), Rn(R) {}
     double operator() ();
     double value(const double) const;
 };

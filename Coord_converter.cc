@@ -30,30 +30,30 @@ int main(int argc,char *argv[])
 
   if(argc<4) {
     cerr << "Inputs: XXXfromXXX input_file output_file (nskip=0) "
-	 << "(code_units_input=f) (code_units_output=f) "
-	 << "(R0="<< GalactoConstants::Rsun <<") "
-	 << "(z0="<< GalactoConstants::zsun <<") "
-	 << "(v0="<< GalactoConstants::vcsun*Units::kms_i<<")"
-	 << " (epoch=2000)\n"
-	 << argv[0] << " h for help\n";
+         << "(code_units_input=f) (code_units_output=f) "
+         << "(R0="<< GalactoConstants::Rsun <<") "
+         << "(z0="<< GalactoConstants::zsun <<") "
+         << "(v0="<< GalactoConstants::vcsun*Units::kms_i<<")"
+         << " (epoch=2000)\n"
+         << argv[0] << " h for help\n";
     if(argc>1) if(argv[1][0] == 'h') {
       cerr << "Program to convert between different coordinate systems (see "
-	   << "PJMCoords.h)\n"
-	   << "XXX refer to coordinate systems. Possible choices:\n"
-	   << "\tGCA\t\tGalactocentric CArtesian (x,y,z,vx,vy,vz)\n"
-	   << "\tGCY\t\tGalactocentric CYlindrical (R,z,phi,vR,vz,vphi)\n"
-	   << "\tLSR\t\tLocal Standard of Rest (x,y,z,vx,vy,vz)\n"
-	   << "\tHCA\t\tHeliocentric CArtesian (x,y,z,u,v,w)\n"
-	   << "\tHGP\t\tHeliocentric Galactic Polar (r,l,b,vr,mu_l*,mu_b)\n"
-	   << "\tHEQ\t\tHeliocentric EQuatorial polar (r,a,d,vr,mu_a*,mu_d)\n\n"
-	   << "Input file must contain coordinates in each row, with nskip "
-	   << "values before the first coord value in each row\n"
-	   << "Output is just the new coordinates\n"
-	   << "code_units_(in/out)put true if (in/out)put values "
-	   << "in kpc, Myr, radians\n"
-	   << "R0,z0 given in kpc, v0 in km/s (and negative),\n"
-	   << "Non-code units are kpc for distances, degrees for angles,"
-	   << "km/s for velocities, mas/yr for proper motions\n";
+           << "PJMCoords.h)\n"
+           << "XXX refer to coordinate systems. Possible choices:\n"
+           << "\tGCA\t\tGalactocentric CArtesian (x,y,z,vx,vy,vz)\n"
+           << "\tGCY\t\tGalactocentric CYlindrical (R,z,phi,vR,vz,vphi)\n"
+           << "\tLSR\t\tLocal Standard of Rest (x,y,z,vx,vy,vz)\n"
+           << "\tHCA\t\tHeliocentric CArtesian (x,y,z,u,v,w)\n"
+           << "\tHGP\t\tHeliocentric Galactic Polar (r,l,b,vr,mu_l*,mu_b)\n"
+           << "\tHEQ\t\tHeliocentric EQuatorial polar (r,a,d,vr,mu_a*,mu_d)\n\n"
+           << "Input file must contain coordinates in each row, with nskip "
+           << "values before the first coord value in each row\n"
+           << "Output is just the new coordinates\n"
+           << "code_units_(in/out)put true if (in/out)put values "
+           << "in kpc, Myr, radians\n"
+           << "R0,z0 given in kpc, v0 in km/s (and negative),\n"
+           << "Non-code units are kpc for distances, degrees for angles,"
+           << "km/s for velocities, mas/yr for proper motions\n";
     }
     exit(0);
   }
@@ -121,8 +121,8 @@ int main(int argc,char *argv[])
       else if(intype=="GCA") OC.take_GCA(input);
       else if(intype=="GCY") OC.take_GCY(input);
       else {
-	cerr << "requirement "<< argv[1] << "not understood\n";
-	exit(1);
+        cerr << "requirement "<< argv[1] << "not understood\n";
+        exit(1);
       }
     } else {
       if(intype=="HEQ") OC.take_HEQ_units(input);
@@ -132,8 +132,8 @@ int main(int argc,char *argv[])
       else if(intype=="GCA") OC.take_GCA_units(input);
       else if(intype=="GCY") OC.take_GCY_units(input);
       else {
-	cerr << "requirement "<< argv[1] << "not understood\n";
-	exit(1);
+        cerr << "requirement "<< argv[1] << "not understood\n";
+        exit(1);
       }
     }
     //for(int j=0;j<infile_offset;j++) to << line_pre[j] << ' ';
@@ -145,8 +145,8 @@ int main(int argc,char *argv[])
       else if(outtype=="GCA") to << OC.give_GCA_units()<< " ";
       else if(outtype=="GCY") to << OC.give_GCY_units()<< " ";
       else {
-	cerr << "requirement "<< argv[1] << "not understood\n";
-	exit(1);
+        cerr << "requirement "<< argv[1] << "not understood\n";
+        exit(1);
       }
     } else {
 
@@ -157,8 +157,8 @@ int main(int argc,char *argv[])
       else if(outtype=="GCA") to << OC.give_GCA()<< " ";
       else if(outtype=="GCY") to << OC.give_GCY()<< " ";
       else {
-	cerr << "requirement "<< argv[1] << "not understood\n";
-	exit(1);
+        cerr << "requirement "<< argv[1] << "not understood\n";
+        exit(1);
       }
     }
     //for(int j=0;j!=n_excess;j++) to << line_post[j] << ' ';

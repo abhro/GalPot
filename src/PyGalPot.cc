@@ -25,12 +25,12 @@ extern "C" {
     file.open(fname);
     if(file.is_open())
       {
-	      Phi = new GalaxyPotential(file);
+              Phi = new GalaxyPotential(file);
       }
     else
       {
-	      cerr << "Potential file "<< fname << " doesn't exist. Exiting...\n";
-	      exit(1);
+              cerr << "Potential file "<< fname << " doesn't exist. Exiting...\n";
+              exit(1);
       }
     file.close();
     return Phi;
@@ -46,7 +46,7 @@ extern "C" {
     return P;
   }
   void GalPot_Potential(GalaxyPotential *Phi, double P[],
-  			  double R[], double z[], int length){
+                          double R[], double z[], int length){
     for (int i=0; i<length; i++){
       P[i] = (*Phi)(R[i],z[i]);
     }
@@ -54,16 +54,16 @@ extern "C" {
   }
 
   double GalPot_Potential_and_derivatives_single(GalaxyPotential* Phi,
-					  double R, double z,
-					  double *dPdR, double *dPdz){
+                                          double R, double z,
+                                          double *dPdR, double *dPdz){
     double P = (*Phi)(R,z,*dPdR,*dPdz);
     //cout << *dPdR << "\n";
     return P;
   }
   void GalPot_Potential_and_derivatives(GalaxyPotential* Phi, double P[],
-					double R[], double z[],
-					double dPdR[], double dPdz[],
-					int length){
+                                        double R[], double z[],
+                                        double dPdR[], double dPdz[],
+                                        int length){
     for (int i=0; i<length; i++){
       P[i] = (*Phi)(R[i],z[i],dPdR[i],dPdz[i]);
     }
@@ -74,7 +74,7 @@ extern "C" {
     return (*Phi).Density(R,z);
   }
   void GalPot_Density(GalaxyPotential *Phi, double rho[], double R[], double z[],
-			int length){
+                        int length){
     for (int i=0; i<length; i++){
       rho[i] =  (*Phi).Density(R[i],z[i]);
     }
@@ -141,15 +141,15 @@ extern "C" {
 
   // run the orbit integrator purely to get orbit statistics
   // Note that this can be run with multiple different stating points
-  int runOrbitIntegratorforstats(OrbitIntegratorWithStats* OI, 
+  int runOrbitIntegratorforstats(OrbitIntegratorWithStats* OI,
                                  double XV[],      // Input: R,z,phi,vR,vz,vphi
                                  double outputs[], // Output: Energy, Lz, peri, apo, Rg, e
                                  int Ndim) {       // Input: Number of input XVs
-    
+
     Vector <double,6> XVvec;
     for (int n = 0; n<Ndim; n++) {
       for(int i=0;i<6;i++) {
-        XVvec[i] = XV[6*n+i]; 
+        XVvec[i] = XV[6*n+i];
       }
       OI->setup(XVvec);
       int failure = OI->run();
@@ -172,7 +172,7 @@ extern "C" {
 
   // run the orbit integrator purely to get orbit path(s) and statistics
   // Note that this can be run with multiple different stating points
-  int runOrbitIntegratorwithPath(OrbitIntegratorWithStats* OI, 
+  int runOrbitIntegratorwithPath(OrbitIntegratorWithStats* OI,
                                   double XV[],      // Input: R,z,phi,vR,vz,vphi
                                   double tseries[], // Input: times for output
                                   int nt,           // Input: number of times
@@ -184,7 +184,7 @@ extern "C" {
     Vector <double,6>* XV_out = new Vector <double,6>[nt];
     for (int n = 0; n<Ndim; n++) {
       for(int i=0;i<6;i++) {
-        XVvec[i] = XV[6*n+i]; 
+        XVvec[i] = XV[6*n+i];
       }
       OI->setup(XVvec);
       int failure = OI->runWithOutputAtGivenTimes(XV_out,tseries,nt);
@@ -192,7 +192,7 @@ extern "C" {
         for(int j=0;j<6;j++){
           if(failure == 0)
             path[n*nt*6+i*6+j] = XV_out[i][j];
-          else 
+          else
             path[n*nt*6+i*6+j] = 0.;
         }
       }
@@ -213,15 +213,6 @@ extern "C" {
   return 0;
   }
 
-
-
-
-
-
-
-
-
-
 }
 
 
@@ -232,9 +223,9 @@ int main(int argc, char const *argv[]) {
   //GalPot_delete(Phi);
   Vector <double,6> XV=1.;
   OrbitIntegratorWithStats* OI = OrbitIntegrator_new(Phi,13800.);
-  
+
   //resetOrbitIntegratorEndTime(OI,1380.);
-  
+
   OI->run();
 
   return 0;

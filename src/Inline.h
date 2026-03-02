@@ -9,7 +9,7 @@
 //                                                                             |
 //-----------------------------------------------------------------------------+
 //
-// Contains lots of stuff I'm not going to look at too closely. Hopefully 
+// Contains lots of stuff I'm not going to look at too closely. Hopefully
 // nothing too dangerous...
 //
 
@@ -109,16 +109,16 @@ inline const char* stndrdth(const int i)
 {
      int ia= (i<0)? -i:i;
     switch( ia % 100 ) {
-        case 11: 
-        case 12: 
+        case 11:
+        case 12:
         case 13: return "th";
         default:
         switch( ia % 10 ) {
             case 1:  return "st";
-            case 2:  return "nd"; 
+            case 2:  return "nd";
             case 3:  return "rd";
             default: return "th";
-        }   
+        }
     }
 }
 //------------------------------------------------------------------------------

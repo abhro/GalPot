@@ -39,8 +39,7 @@ public:
 };
 
 
-inline KeplerPotential::KeplerPotential(double M) :
-		      GM(M*Units::G)
+inline KeplerPotential::KeplerPotential(double M) : GM(M*Units::G)
 
 {
 

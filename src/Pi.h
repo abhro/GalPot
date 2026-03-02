@@ -19,9 +19,7 @@ const double Pi3h = 3.   * Pih;
 const double TPi  = 2.   * Pi;
 const double FPi  = 4.   * Pi;
 
-const double SPi  = 1.772453850905516027298167483341;	// Sqrt[Pi]
+const double SPi  = 1.772453850905516027298167483341;   // Sqrt[Pi]
 const double STPi = 2.506628274631000502415765284811;   // Sqrt[2 Pi]
-
-
 
 #endif

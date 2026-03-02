@@ -72,7 +72,7 @@ int main(int argc,char *argv[])
   if(argc<4) {
     cerr << "Input: input_file n_tests output_file\n";
     cerr << "input_file is an ascii file giving position and motion in equatorial coordinates, with uncertainties. n_tests is number of Monte Carlo sample used per star\n"
-	 << "\tdistance distance _err RA RA_err DEC DEC_err v_los v_los_err mu_a* mu_a*_err mu_d mu_d_err\n";
+         << "\tdistance distance _err RA RA_err DEC DEC_err v_los v_los_err mu_a* mu_a*_err mu_d mu_d_err\n";
     cerr << "\t(distance in kpc, angles in degrees, velocity in km/s, proper motion in mas/yr)\n";
     cerr << " Output is in kpc (distances), km^2/s^2 (energy), kpc km/s (angular momentum)\n";
     cerr << " Quoted values are medians from Monte Carlo sample, with minus and plus 1sigma values found from 15.87 and 84.13 percentiles.\n";
@@ -114,24 +114,24 @@ int main(int argc,char *argv[])
       for(int i=0;i!=6;i++) ss >> EquatorialCoords[i] >> EquatorialCoordsErr[i];
       //cerr << EquatorialCoords << '\n';
       for(int i=0;i!=n_tests;i++) {
-	// Add uncertainties
-	for(int j=0;j!=6;j++)
-	  EquatorialCoordsTmp[j] = EquatorialCoords[j]
-	    + EquatorialCoordsErr[j] * GaussianRandom();
+        // Add uncertainties
+        for(int j=0;j!=6;j++)
+          EquatorialCoordsTmp[j] = EquatorialCoords[j]
+            + EquatorialCoordsErr[j] * GaussianRandom();
 
-	while(EquatorialCoordsTmp[0] < 0.) {
-	  // I'm not letting you have a negative distance. Don't be silly.
-	   EquatorialCoordsTmp[0] = EquatorialCoords[0]
-	     + EquatorialCoordsErr[0] * GaussianRandom();
-	}
-	EquatorialCoordsTmp[0] *= Units::kpc;
-	EquatorialCoordsTmp[1] *= Units::degree;
-	EquatorialCoordsTmp[2] *= Units::degree;
-	EquatorialCoordsTmp[3] *= Units::kms;
-	EquatorialCoordsTmp[4] *= Units::masyr;
-	EquatorialCoordsTmp[5] *= Units::masyr;
+        while(EquatorialCoordsTmp[0] < 0.) {
+          // I'm not letting you have a negative distance. Don't be silly.
+           EquatorialCoordsTmp[0] = EquatorialCoords[0]
+             + EquatorialCoordsErr[0] * GaussianRandom();
+        }
+        EquatorialCoordsTmp[0] *= Units::kpc;
+        EquatorialCoordsTmp[1] *= Units::degree;
+        EquatorialCoordsTmp[2] *= Units::degree;
+        EquatorialCoordsTmp[3] *= Units::kms;
+        EquatorialCoordsTmp[4] *= Units::masyr;
+        EquatorialCoordsTmp[5] *= Units::masyr;
     XV_cart = OC.HCAfromHEQ(EquatorialCoordsTmp);
-	XV = OC.GCYfromHEQ(EquatorialCoordsTmp);
+        XV = OC.GCYfromHEQ(EquatorialCoordsTmp);
     X.push_back(XV_cart[0]/Units::kpc);
     Y.push_back(XV_cart[1]/Units::kpc);
     Z.push_back(XV_cart[2]/Units::kpc);
@@ -150,9 +150,9 @@ int main(int argc,char *argv[])
 
       if(BadPoints>=DangerPoint) {
       // This line should never be reached (change 2026)
-	    std::cerr << "WARNING: Output unreliable\t"
-		          << "Too many unbound orbits for star with coordinates "
-		          << EquatorialCoords << "\n";
+            std::cerr << "WARNING: Output unreliable\t"
+                          << "Too many unbound orbits for star with coordinates "
+                          << EquatorialCoords << "\n";
       }
       OutputMedianAndUpperLower(output,X);
       OutputMedianAndUpperLower(output,Y);

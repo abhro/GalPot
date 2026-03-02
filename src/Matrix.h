@@ -62,7 +62,7 @@ public:
     T*           operator[]           (const int n1) { return a+n1*N2; }
     T* const     operator[]           (const int n1) const { return a+n1*N2; }
     T            operator()           (const int n1, const int n2) const
-				          { return a[n1*N2+n2];}
+                                          { return a[n1*N2+n2];}
 
     Vector<T,N1> column               (const int) const;
     void         fill_column          (const T, const int);
@@ -105,7 +105,7 @@ inline Matrix<T,N1,N2> operator* (const T x, const Matrix<T,N1,N2>& M)
 
 template<class T, int N1, int N2>
 inline void Matrix<T,N1,N2>::error(const char* msgs)
-{ 
+{
     cerr << " Matrix ERROR: "<<msgs<<'\n';
 #ifndef ebug
     exit(1);
@@ -132,8 +132,8 @@ inline Matrix<T,N1,N2>::Matrix(const T fill_value)
 
 template<class T, int N1, int N2>
 inline Matrix<T,N1,N2>::Matrix(const transpose<T,N1,N2>& M)
-	{  int i,j;
-	  for(i=0; i<N1; i++) for(j=0; j<N2; j++) a[i*N2+j] = M(i,j); }
+        {  int i,j;
+          for(i=0; i<N1; i++) for(j=0; j<N2; j++) a[i*N2+j] = M(i,j); }
 
 #endif
 
@@ -158,21 +158,21 @@ inline Matrix<T,N1,N2>& Matrix<T,N1,N2>::operator-= (const Matrix<T,N1,N2>& M)
 
 template<class T, int N1, int N2>
 inline Matrix<T,N1,N2>& Matrix<T,N1,N2>::operator= (const transpose<T,N1,N2>& M)
-	{  int i,j;
-	  for(i=0; i<N1; i++) for(j=0; j<N2; j++) a[i*N2+j] = M(i,j);
-	  return *this; }
+        {  int i,j;
+          for(i=0; i<N1; i++) for(j=0; j<N2; j++) a[i*N2+j] = M(i,j);
+          return *this; }
 
 template<class T, int N1, int N2>
 inline Matrix<T,N1,N2>& Matrix<T,N1,N2>::operator+=(const transpose<T,N1,N2>& M)
-	{  int i,j;
-	  for(i=0; i<N1; i++) for(j=0; j<N2; j++) a[i*N2+j]-= M(i,j);
-	  return *this; }
+        {  int i,j;
+          for(i=0; i<N1; i++) for(j=0; j<N2; j++) a[i*N2+j]-= M(i,j);
+          return *this; }
 
 template<class T, int N1, int N2>
 inline Matrix<T,N1,N2>& Matrix<T,N1,N2>::operator-=(const transpose<T,N1,N2>& M)
-	{  int i,j;
-	  for(i=0; i<N1; i++) for(j=0; j<N2; j++) a[i*N2+j]+= M(i,j);
-	  return *this; }
+        {  int i,j;
+          for(i=0; i<N1; i++) for(j=0; j<N2; j++) a[i*N2+j]+= M(i,j);
+          return *this; }
 
 #endif
 
@@ -362,16 +362,16 @@ inline ostream& operator<< (ostream& s, const Matrix<T,N1,N2>& M)
     {  int i,j;
       s << '\n';
       for(i=0; i<N1; i++) {
-	s << "   " << M(i,0);
-	for(j=1; j<N2; j++) s << ',' << M(i,j);
-	s << '\n'; 
+        s << "   " << M(i,0);
+        for(j=1; j<N2; j++) s << ',' << M(i,j);
+        s << '\n';
       } return s;
     }
 
 template<class T, int N1, int N2>
 inline istream& operator >> (istream& s, Matrix<T,N1,N2>& M)
     {  int i,j;
-      for(i=0;i<N1;i++) for(j=0;j<N2;j++) s >> M[i][j]; 
+      for(i=0;i<N1;i++) for(j=0;j<N2;j++) s >> M[i][j];
       return s; }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -396,9 +396,9 @@ inline Matrix<T,N,N> unity()
 
 template<class T, int N>
 inline T trace(const Matrix<T,N,N>& M)
-{ 
+{
      T t = T(0);
-    for( int i=0; i<N; i++) t += M(i,i); 
+    for( int i=0; i<N; i++) t += M(i,i);
     return t;
 }
 
@@ -408,9 +408,9 @@ inline Matrix<T,L,N> operator* (const Matrix<T,L,M>& A, const Matrix<T,M,N>& B)
      int l,m,n;
     Matrix<T,L,N> C=0.;
     for(l=0; l<L; l++)
-	for(n=0; n<N; n++)
-	    for(m=0; m<M; m++)
-	        C[l][n] += A(l,m) * B(m,n);
+        for(n=0; n<N; n++)
+            for(m=0; m<M; m++)
+                C[l][n] += A(l,m) * B(m,n);
     return C;
 }
 
@@ -423,8 +423,8 @@ inline void multiply(Matrix<T,L,M>& A, Matrix<T,M,N>& B, Matrix<T,L,N>& C)
         for(pb=B[0],n=0; n<N; n++,pb++,pc++) {
             for(y=T(0),pai=pa,pbi=pb,m=0; m<M; m++,pai++,pbi+=N)
                 y += *pai * *pbi;
-	    *pc = y;
-	}
+            *pc = y;
+        }
 }
 
 template<class T, int L, int M, int N>
@@ -436,9 +436,9 @@ inline void multiplyZ(Matrix<T,L,M>& A, Matrix<T,M,N>& B, Matrix<T,L,N>& C)
     for(l=0; l<L; l++,pa+=M)
         for(pb=B[0],n=0; n<N; n++,pb++,pc++) {
             for(y=T(0),pai=pa,pbi=pb,m=0; m<M; m++,pai++,pbi+=N)
-		if((*pai) && (*pbi)) y += *pai * *pbi;
-	    *pc = y;
-	}
+                if((*pai) && (*pbi)) y += *pai * *pbi;
+            *pc = y;
+        }
 }
 
 template<class T, int N1, int N2>
@@ -447,7 +447,7 @@ inline void multiplyZ(Matrix<T,N1,N2>& A, const T x, Matrix<T,N1,N2>& C)
 {
      T *pa=A[0],*pc=C[0],*aup=pa+N1*N2;
     for(; pa<aup; pa++,pc++)
-	if(*pa) *pc = *pa * x;
+        if(*pa) *pc = *pa * x;
 }
 
 template<class T, int N1, int N2>
@@ -456,7 +456,7 @@ inline void apl_ml(Matrix<T,N1,N2>& A, const T x, Matrix<T,N1,N2>& C)
 {
      T *pa=A[0],*pc=C[0],*aup=pa+N1*N2;
     for(; pa<aup; pa++,pc++)
-	if(*pa) *pc += *pa * x;
+        if(*pa) *pc += *pa * x;
 }
 
 template<class T, int L, int M, int N>
@@ -468,9 +468,9 @@ inline void as_ml_ml(Matrix<T,L,M>& A, Matrix<T,M,N>& B, const T x, Matrix<T,L,N
     for(l=0; l<L; l++,pa+=M)
         for(pb=B[0],n=0; n<N; n++,pb++,pc++) {
             for(y=T(0),pai=pa,pbi=pb,m=0; m<M; m++,pai++,pbi+=N)
-		if((*pai) && (*pbi)) y += *pai * *pbi;
-	    *pc = y * x;
-	}
+                if((*pai) && (*pbi)) y += *pai * *pbi;
+            *pc = y * x;
+        }
 }
 
 template<class T, int L, int M>
@@ -479,19 +479,19 @@ inline Vector<T,L> operator* (const Matrix<T,L,M>& A, const Vector<T,M>& B)
      int l,m;
              Vector<T,L> C=0.;
     for(l=0; l<L; l++)
-	for(m=0; m<M; m++)
-	    C[l] += A(l,m) * B(m);
+        for(m=0; m<M; m++)
+            C[l] += A(l,m) * B(m);
     return C;
 }
 
 template<class T, int L, int M>
-inline Vector<T,M> operator* (const Vector<T,L>& B, const Matrix<T,L,M>& A) 
+inline Vector<T,M> operator* (const Vector<T,L>& B, const Matrix<T,L,M>& A)
 {
      int l,m;
              Vector<T,M> C=0.;
     for(m=0; m<M; m++)
-	for(l=0; l<L; l++)
-	    C[m] += B(l) * A(l,m);
+        for(l=0; l<L; l++)
+            C[m] += B(l) * A(l,m);
     return C;
 }
 
@@ -521,29 +521,29 @@ inline void GaussInvert(Matrix<T,N,N>& A)
                         big  = abs(A(j,k));
                         irow = j;
                         icol = k;
-		    }
-		} else if(ipiv(k)>1) A.error(" Matrix to invert is singular");
-	    }
-	    ++(ipiv[icol]);
-	    if(irow != icol) {
-	    for(l=0; l<N; l++) swap(A[irow][l], A[icol][l]);
-	}
-	indxr[i] = irow;
-	indxc[i] = icol;
-	if(A(icol,icol)==Zero) A.error(" Matrix to invert is singular");
-	pivinv = One/A(icol,icol);
-	A[icol][icol] = One;
-	for(l=0; l<N; l++) A[icol][l] *= pivinv;
-	for(ll=0; ll<N; ll++)
-	    if(ll != icol) {
-	        dum         = A(ll,icol);
-	        A[ll][icol] = Zero;
-		for(l=0; l<N; l++) A[ll][l] -= A(icol,l) * dum;
-	    }
+                    }
+                } else if(ipiv(k)>1) A.error(" Matrix to invert is singular");
+            }
+            ++(ipiv[icol]);
+            if(irow != icol) {
+            for(l=0; l<N; l++) swap(A[irow][l], A[icol][l]);
+        }
+        indxr[i] = irow;
+        indxc[i] = icol;
+        if(A(icol,icol)==Zero) A.error(" Matrix to invert is singular");
+        pivinv = One/A(icol,icol);
+        A[icol][icol] = One;
+        for(l=0; l<N; l++) A[icol][l] *= pivinv;
+        for(ll=0; ll<N; ll++)
+            if(ll != icol) {
+                dum         = A(ll,icol);
+                A[ll][icol] = Zero;
+                for(l=0; l<N; l++) A[ll][l] -= A(icol,l) * dum;
+            }
     }
     for(l=N-1; l>=0; l--)
-	if (indxr(l) != indxc(l) )
-	    for(k=0; k<N; k++) swap(A[k][indxr(l)], A[k][indxc(l)]);
+        if (indxr(l) != indxc(l) )
+            for(k=0; k<N; k++) swap(A[k][indxr(l)], A[k][indxc(l)]);
 }
 
 template<class T, int N>
@@ -576,8 +576,8 @@ inline Matrix<T,N,M> operator! (const Matrix<T,M,N>& A)
     Matrix<T,N,M> At;
      int i,j;
     for(i=0; i<N; i++)
-	for(j=0; j<M; j++)
-	    At[i][j] = A(j,i);
+        for(j=0; j<M; j++)
+            At[i][j] = A(j,i);
     return At;
 }
 

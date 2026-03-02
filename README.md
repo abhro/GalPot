@@ -36,8 +36,6 @@ Running any of the executables without any arguments should provide a descriptio
 GalPotPythonExample.ipynb demonstrates the Python wrapper. GalPotRescaler.ipynb is an example of rescaling the potential for new distances to from the Sun to the Galactic centre and/or circular velocities at the Sun's position.
 
 
-### Notes: 
+### Notes:
 
 The basic GalPot is rather poorly suited to representing smaller-scale objects (like Sgr A* or a nuclear disc). It is recommended to combine GalPot with a Kepler or Miyamoto-Nagai potential if you want to represent these objects.
-
-

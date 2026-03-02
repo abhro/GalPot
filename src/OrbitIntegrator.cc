@@ -15,7 +15,7 @@
 using std::ofstream;
 
 Vector<double,6> GiveVec6(const double &a0,const double &a1,const double &a2,
-			  const double &a3,const double &a4,const double &a5) {
+                          const double &a3,const double &a4,const double &a5) {
   Vector<double,6> out;
   out[0] = a0;
   out[1] = a1;
@@ -27,9 +27,9 @@ Vector<double,6> GiveVec6(const double &a0,const double &a1,const double &a2,
 }
 
 
-typedef Vector<double,4>	DB4;
-typedef Vector<double,6>	Vec6;
-typedef Matrix<double,4,4>	DB44;
+typedef Vector<double,4>        DB4;
+typedef Vector<double,6>        Vec6;
+typedef Matrix<double,4,4>      DB44;
 
 ////////////////////////////////////////////////////////////////////////////////
 OrbitIntegratorStep::OrbitIntegratorStep(const Vector<double,6> xv, Potential* Phi, const double dE)
@@ -113,8 +113,8 @@ void OrbitIntegratorStep::stepRK_by(double& dt, const double f)
 //
 
 OrbitIntegratorWithStats::OrbitIntegratorWithStats(Vector<double,6> StartPoint,
-						   Potential *Phi,
-						   double Ttot) {
+                                                   Potential *Phi,
+                                                   double Ttot) {
   setup(StartPoint,Phi,Ttot);
 }
 
@@ -128,8 +128,8 @@ Vector<double,6> OrbitIntegratorWithStats::reverse_corrected_XV(Vector<double,6>
 }
 
 void  OrbitIntegratorWithStats::setup(Vector<double,6> StartPoint,
-				      Potential *PhiIn,
-				      double Ttot) {
+                                      Potential *PhiIn,
+                                      double Ttot) {
   Pot = PhiIn;
   Tmax = fabs(Ttot);
   reverse = (Ttot<0);
@@ -138,7 +138,7 @@ void  OrbitIntegratorWithStats::setup(Vector<double,6> StartPoint,
   // Not set up for zero angular momentum orbits
   if(XV_ini[5] == 0.) {
     cerr << "WARNING: Code not suited to zero angular momentum orbits.\n"
-	 << "Adding small v_phi component\n";
+         << "Adding small v_phi component\n";
     double tmp_v2 = XV_ini[3]*XV_ini[3]+XV_ini[4]*XV_ini[4];
     if(tmp_v2 != 0.) {
       XV_ini[5] = 1.e-5*sqrt(tmp_v2);
@@ -170,9 +170,9 @@ void  OrbitIntegratorWithStats::setup(Vector<double,6> StartPoint) {
   run_complete = false;
 }
 
-void OrbitIntegratorWithStats::setTmax(double TmaxIn) { 
-    Tmax = fabs(TmaxIn); 
-    reverse = (TmaxIn<0.); 
+void OrbitIntegratorWithStats::setTmax(double TmaxIn) {
+    Tmax = fabs(TmaxIn);
+    reverse = (TmaxIn<0.);
     setupDone=false;
     }
 
@@ -181,8 +181,8 @@ void OrbitIntegratorWithStats::setTmax(double TmaxIn) {
 // integration happens here. The type tells the function what the return will
 // be
 int OrbitIntegratorWithStats::runGeneric(const string type,
-					 Vector <double,6> *output,
-					 double *tout, int N) {
+                                         Vector <double,6> *output,
+                                         double *tout, int N) {
   int nOutRun=0;
   double t=0.;
   double outputDelt, dt=1.e-2, t_tol=1.e-4;
@@ -208,12 +208,12 @@ int OrbitIntegratorWithStats::runGeneric(const string type,
     nOutRun++;
 
   } else if(type=="OutputSetTimes") {
-			if(tout[nOutRun] == 0.)  {
-				output[nOutRun] = reverse_corrected_XV(XV_ini);
-		    nOutRun++;
-			}
-		tnext = fabs(tout[nOutRun]);
-	}
+                        if(tout[nOutRun] == 0.)  {
+                                output[nOutRun] = reverse_corrected_XV(XV_ini);
+                    nOutRun++;
+                        }
+                tnext = fabs(tout[nOutRun]);
+        }
 
 
   // initial values
@@ -233,8 +233,8 @@ int OrbitIntegratorWithStats::runGeneric(const string type,
       Stepper.set_maxstep(dt);
     }
     if(type=="OutputSetTimes") {
-			Stepper.set_maxstep(std::min(maxStepIni,tnext-t));
-		}
+                        Stepper.set_maxstep(std::min(maxStepIni,tnext-t));
+                }
 
 
     Stepper.stepRK_by(dt);
@@ -254,20 +254,20 @@ int OrbitIntegratorWithStats::runGeneric(const string type,
 
     if( (type == "OutputNoTimes" || type == "OutputWithTimes") && t>=tnext ) {
       if(nOutRun < N) {
-				if( type == "OutputWithTimes" ) tout[nOutRun] = (reverse)? -t : t;
-				output[nOutRun] = reverse_corrected_XV(XV);
-				nOutRun++;
-				tnext += tbetween;
+                                if( type == "OutputWithTimes" ) tout[nOutRun] = (reverse)? -t : t;
+                                output[nOutRun] = reverse_corrected_XV(XV);
+                                nOutRun++;
+                                tnext += tbetween;
       }
     }
     if(type=="OutputSetTimes" && t>=tnext) {
-			if(nOutRun < N) {
-				output[nOutRun] = reverse_corrected_XV(XV);
-				nOutRun++;
-			 	tnext  = fabs(tout[nOutRun]);
-		 	}
-			else tnext = Tmax;
-		}
+                        if(nOutRun < N) {
+                                output[nOutRun] = reverse_corrected_XV(XV);
+                                nOutRun++;
+                                tnext  = fabs(tout[nOutRun]);
+                        }
+                        else tnext = Tmax;
+                }
   }
 
   Maxr = sqrt(Maxr);
@@ -298,6 +298,4 @@ int OrbitIntegratorWithStats::runGeneric(const string type,
 
   return 0; // success
 }
-
-
 //end of OrbitIntegrator.cc ////////////////////////////////////////////////////

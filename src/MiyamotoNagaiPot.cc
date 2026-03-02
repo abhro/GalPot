@@ -15,7 +15,7 @@ double MiyamotoNagaiPotential::operator() (const double R, const double z) const
 }
 
 double MiyamotoNagaiPotential::operator() (const double R, const double z, double& dPdR,
-			       double& dPdz) const
+                               double& dPdz) const
 {
   double  ZB=sqrt(z*z+Bq), AZB = A + ZB,
     F = 1./(R*R+AZB*AZB),rtF=sqrt(F);
@@ -30,7 +30,7 @@ Frequencies MiyamotoNagaiPotential::KapNuOm(const double R) const
   double dPR,dPz,P;
   P = (*this)(R,0.,dPR,dPz);
   double F = 1./(R*R+ABq),rtF=sqrt(F),
-    om2    = dPR/R, 
+    om2    = dPR/R,
     nu2    = GM*ABoB*F*rtF,
     kappa2 = GM*(F*rtF - 3.*R*R*F*F*rtF) + 3.*om2;
   Frequencies output= sqrt(kappa2);
@@ -46,11 +46,3 @@ ostream& operator<< (ostream& to, const MiyamotoNagaiPotential& P)
      << " a=" << P.A << " b=" << sqrt(P.Bq) << '\n';
     return to;
 }
-
-
-
-
-
-
-
-

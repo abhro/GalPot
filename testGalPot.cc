@@ -68,10 +68,10 @@ int main(int argc,char *argv[])
     cout<<"And the inverse:\n Lz = Phi.LfromRc(R) = " << Phi.LfromRc(R) <<"\n\n";
 
     //    cout<<"The Laplacian of Phi, which tends towards 4 Pi G rho:\n Lap = Phi.Laplace(R,z) = "
-    //	<< Phi.Laplace(R,z) << "\n\n";
+    //  << Phi.Laplace(R,z) << "\n\n";
     //cout << 4*Pi*Units::G*Phi.Density(R,z)<< "\n\n";
 
     cout<< "And the epicyclic frequencies (radial, vertical & azimuthal):\n";
     cout<<" KNO = Phi.KapNuOm(R) = "
-	<< Phi.KapNuOm(R) << '\n';
+        << Phi.KapNuOm(R) << '\n';
 }

@@ -36,7 +36,7 @@ public:
     Vector&  operator-= (const T);
     Vector&  operator*= (const T);
     Vector&  operator/= (const T);
-    Vector&  apply	(T(*)(T));
+    Vector&  apply      (T(*)(T));
 
     Vector   operator-  () const;
     Vector   operator+  (const Vector&) const;
@@ -56,8 +56,8 @@ public:
     T&       operator[] (const int n)       { return  a[n]; }
     int      NumberofTerms() const { return N; }
 
-	     operator T*       ()	 { return a; }
-	     operator const T* () const	 { return a; }
+             operator T*       ()        { return a; }
+             operator const T* () const  { return a; }
 };
 
 // Vector cross product for triples
@@ -104,10 +104,10 @@ inline Vector<T,N> operator- (const T x, const Vector<T,N>& V)
 
 template<class T, int N>
 void Vector<T,N>::division_by_zero_error()
-{ 
+{
     cerr << " Vector: division by zero \n";
 #ifndef ebug
-    exit(1); 
+    exit(1);
 #endif
 }
 
@@ -183,7 +183,7 @@ Vector<T,N>& Vector<T,N>::multiply_elements (const Vector& V)
 // (C) application of functions T->T onto individual elements
 
 template<class T, int N>
-Vector<T,N>& Vector<T,N>::apply	( T(*f)(T) )
+Vector<T,N>& Vector<T,N>::apply ( T(*f)(T) )
     { for( int i=0; i<N; i++) a[i] = f(a[i]);
       return *this; }
 
@@ -236,11 +236,11 @@ int Vector<T,N>::operator!= (const Vector<T,N>& V) const
 
 // (E) norm
 // For T other than int, long int, float, double, and long double
-//	`T norm(const T)'
+//      `T norm(const T)'
 // must be pre-defined by the user.
 
 //template<class T, int N>
-//T Vector<T,N>::norm() const 
+//T Vector<T,N>::norm() const
 //    {  T x = ::norm(a[0]);
 //      for( int i=1; i<N; i++) x += ::norm(a[i]);
 //      return x; }
@@ -268,8 +268,8 @@ istream& operator>> (istream& s, Vector<T,N>& V)
       s >> c;
       if(c == '(') {
           for(i=0; i<N; i++) s >> x[i];
-	  s >> c;
-	  if(c != ')') s.clear(ios::badbit);
+          s >> c;
+          if(c != ')') s.clear(ios::badbit);
       } else {
           s.putback(c);
           for(i=0; i<N; i++) s >> x[i];
@@ -286,22 +286,22 @@ istream& operator>> (istream& s, Vector<T,N>& V)
 template<class T, int N>
 inline Vector<T,N> real(const Vector<complex<T>,N>& V)
     { Vector<T,N> R;
-      for( int i=0; i<N; i++) R[i] = real(V(i)); 
+      for( int i=0; i<N; i++) R[i] = real(V(i));
       return R; }
 template<class T, int N>
 inline Vector<T,N> imag(const Vector<complex<T>,N>& V)
     { Vector<T,N> R;
-      for( int i=0; i<N; i++) R[i] = imag(V(i)); 
+      for( int i=0; i<N; i++) R[i] = imag(V(i));
       return R; }
 template<class T, int N>
-inline 	Vector<T,N> arg(const Vector<complex<T>,N>& V)
+inline  Vector<T,N> arg(const Vector<complex<T>,N>& V)
     { Vector<T,N> R;
-      for( int i=0; i<N; i++) R[i] = arg(V(i)); 
+      for( int i=0; i<N; i++) R[i] = arg(V(i));
       return R; }
 template<class T, int N>
-inline 	Vector<complex<T>,N> conj(const Vector<complex<T>,N>& V)
+inline  Vector<complex<T>,N> conj(const Vector<complex<T>,N>& V)
     { Vector<complex<T>,N> R;
-      for( int i=0; i<N; i++) R[i] = conj(V(i)); 
+      for( int i=0; i<N; i++) R[i] = conj(V(i));
       return R; }
 
 #endif

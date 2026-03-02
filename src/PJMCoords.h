@@ -43,8 +43,8 @@ coordinate systems.
       units: as defined in Units.h (kpc, radian, kpc/Myr)
          The cylindrical galactocentric coordinates are easily defined in
       terms of the galactrocentric cartesian coordinates introduced above:
-		X = R cos(phi), Y = R sin(phi), Z = z
-       	vR = dR/dt, vz = dz/dt, vphi = R dphi/dt.
+                X = R cos(phi), Y = R sin(phi), Z = z
+        vR = dR/dt, vz = dz/dt, vphi = R dphi/dt.
 
 
   LSR Local Standard of Rest
@@ -54,11 +54,11 @@ coordinate systems.
       ting) coordinate system with origin of position on the sun, e_x poin-
       ting towards the Galactic centre (GC), e_y in direction of Galactic
       rotation (GR), and e_z towards NGP, i.e.
-		(x,y,z) = (R0-X, -Y, Z-Zsun)
+                (x,y,z) = (R0-X, -Y, Z-Zsun)
       where R0 is the distance sun-GC, and Zsun is the solar height above the
       plane. The LSR's origin of velocity is on that of a (hypothetic) star
       on a circular orbit at the solar position, i.e.
-		(u,v,w) = (-v_X, v_circ-v_Y, v_Z)
+                (u,v,w) = (-v_X, v_circ-v_Y, v_Z)
       where v_circ is the circular rotation velocity at R=R0, for the Milky
       Way it is negative (it's adopted value and those for R0, Zsun are taken
       from the file Constants.h). The velocity (u,v,w) of a star w.r.t. LSR
@@ -78,12 +78,12 @@ coordinate systems.
   HGP Heliocentric Galactic Polar:
       position = (r,l,b), velocity = (vr,ml,mb)
       units: as defined in Units.h (kpc,radian,kpc/Myr,radian/Myr)
-	  These usually called `galactic coordinates' are often used for
+          These usually called `galactic coordinates' are often used for
       observations of galactic objects. They can be defined in terms of the
       HCA as follows
-		x   = r * cos(b) * cos(l)   e_x points to GC
-		y   = r * cos(b) * sin(l)
-		z   = r * sin(b)
+                x   = r * cos(b) * cos(l)   e_x points to GC
+                y   = r * cos(b) * sin(l)
+                z   = r * sin(b)
                vr  = dr/dt
                ml* = dl/dt * cos(b)
                mb  = db/dt
@@ -115,7 +115,7 @@ coordinate systems.
    centre   |                coordinate system
    x   v    | cartesian |  cylindrical | spherical polar
   ----------+--------------------------------------------
-  GC   GC @)|	 GCA	      GCY	        -
+  GC   GC @)|    GCA          GCY               -
   sun  LSR  |   LSR           -                -
   sun  sun  |   HCA           -             HGP, HEQ
 
@@ -143,10 +143,6 @@ Paul's notes
 
 Eventually I decided that I should probably use some proper c++ for this
 (i.e. create a class that stores the transformation constants)
-
-
-
-
 
 
 */
@@ -205,8 +201,8 @@ coordinate systems.
       units: as defined in Units.h (kpc, radian, kpc/Myr)
          The cylindrical galactocentric coordinates are easily defined in
       terms of the galactrocentric cartesian coordinates introduced above:
-		X = R cos(phi), Y = R sin(phi), Z = z
-       	vR = dR/dt, vz = dz/dt, vphi = R dphi/dt.
+                X = R cos(phi), Y = R sin(phi), Z = z
+        vR = dR/dt, vz = dz/dt, vphi = R dphi/dt.
 
 
   LSR Local Standard of Rest
@@ -216,11 +212,11 @@ coordinate systems.
       ting) coordinate system with origin of position on the sun, e_x poin-
       ting towards the Galactic centre (GC), e_y in direction of Galactic
       rotation (GR), and e_z towards NGP, i.e.
-		(x,y,z) = (R0-X, -Y, Z-Zsun)
+                (x,y,z) = (R0-X, -Y, Z-Zsun)
       where R0 is the distance sun-GC, and Zsun is the solar height above the
       plane. The LSR's origin of velocity is on that of a (hypothetic) star
       on a circular orbit at the solar position, i.e.
-		(u,v,w) = (-v_X, v_circ-v_Y, v_Z)
+                (u,v,w) = (-v_X, v_circ-v_Y, v_Z)
       where v_circ is the circular rotation velocity at R=R0, for the Milky
       Way it is negative (it's adopted value and those for R0, Zsun are taken
       from the file Constants.h). The velocity (u,v,w) of a star w.r.t. LSR
@@ -240,12 +236,12 @@ coordinate systems.
   HGP Heliocentric Galactic Polar:
       position = (r,l,b), velocity = (vr,ml,mb)
       units: as defined in Units.h (kpc,radian,kpc/Myr,radian/Myr)
-	  These usually called `galactic coordinates' are often used for
+          These usually called `galactic coordinates' are often used for
       observations of galactic objects. They can be defined in terms of the
       HCA as follows
-		x   = r * cos(b) * cos(l)   e_x points to GC
-		y   = r * cos(b) * sin(l)
-		z   = r * sin(b)
+                x   = r * cos(b) * cos(l)   e_x points to GC
+                y   = r * cos(b) * sin(l)
+                z   = r * sin(b)
                vr  = dr/dt
                ml* = dl/dt * cos(b)
                mb  = db/dt
@@ -277,7 +273,7 @@ coordinate systems.
    centre   |                coordinate system
    x   v    | cartesian |  cylindrical | spherical polar
   ----------+--------------------------------------------
-  GC   GC @)|	 GCA	      GCY	        -
+  GC   GC @)|   GCA          GCY               -
   sun  LSR  |   LSR           -                -
   sun  sun  |   HCA           -             HGP, HEQ
 
@@ -466,35 +462,23 @@ inline void OmniCoords::take_GCY_units(vec6 tGCY) {
 
 inline void OmniCoords::Backward(int n) {
   switch(n) {
-  case 0 :
-    HEQfromHCA(); break;
-  case 1 :
-    HGPfromHCA(); break;
-  case 2 :
-    HCAfromLSR(); break;
-  case 3 :
-    LSRfromGCA(); break;
-  case 4 :
-    GCAfromGCY(); break;
-  default :
-    cerr << "dude what?\n";
+  case 0 : HEQfromHCA(); break;
+  case 1 : HGPfromHCA(); break;
+  case 2 : HCAfromLSR(); break;
+  case 3 : LSRfromGCA(); break;
+  case 4 : GCAfromGCY(); break;
+  default : cerr << "dude what?\n";
   }
 }
 
 inline void OmniCoords::Forward(int n) {
   switch(n) {
-  case 0 :
-    HCAfromHEQ();break;
-  case 1 :
-    HCAfromHGP(); break;
-  case 2 :
-    LSRfromHCA();break;
-  case 3 :
-    GCAfromLSR(); break;
-  case 4 :
-    GCYfromGCA();break;
-  default :
-    cerr << "dude what?\n";
+  case 0 : HCAfromHEQ(); break;
+  case 1 : HCAfromHGP(); break;
+  case 2 : LSRfromHCA(); break;
+  case 3 : GCAfromLSR(); break;
+  case 4 : GCYfromGCA(); break;
+  default : cerr << "dude what?\n";
   }
 }
 
@@ -505,8 +489,8 @@ inline vec6 OmniCoords::give(int n) {
     bool found = false;     //  from HGP.
     for(int i=2;i<=5 && !found;i++)
       if(know[i]) {
-	       for(int j=i-1;j>1;j--) Backward(j);
-	       found = true;
+               for(int j=i-1;j>1;j--) Backward(j);
+               found = true;
       }
     if(!found) Forward(1);
     Backward(0);
@@ -587,6 +571,5 @@ inline void OmniCoords::set_SBD10() {
 inline void OmniCoords::set_DB98() {
   change_vsol(10.*Units::kms,5.25*Units::kms,7.17*Units::kms);
 }
-
 
 #endif

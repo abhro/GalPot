@@ -16,7 +16,7 @@
 
 #include <ctime>
 
-int main(int argc,char *argv[])  
+int main(int argc,char *argv[])
 {
 
   ifstream file,data;
@@ -25,7 +25,7 @@ int main(int argc,char *argv[])
   Potential *Phi;
 
   OmniCoords OC;
-  
+
 
   file.open(potfile.c_str());
   if(!file){
@@ -34,11 +34,11 @@ int main(int argc,char *argv[])
   }
   Phi = new GalaxyPotential(file);
   file.close();
-  
+
   if(argc<3) {
     cerr << "Input: input_file output_file\n";
     cerr << "Input is an ascii file giving position and motion in galactic coordinates:\n"
-	 << "\tdistance l b v_los mu_l* mu_b\n";
+         << "\tdistance l b v_los mu_l* mu_b\n";
     cerr << "\t(distance in kpc, angles in degrees, velocity in km/s, proper motion in mas/yr)\n";
     cerr << " output is in kpc (distances), km^2/s^2 (energy), kpc km/s (angular momentum)\n";
     return 0;
@@ -53,15 +53,15 @@ int main(int argc,char *argv[])
   output.open(argv[2]);
 
   output << "#MinR MaxR Maxz Minr Maxr MeanR Energy AngMom\n" << std::flush;
-  
+
   Vector <double,6> XV=5.;
 
   Vector <double,6> GalacticCoords;
-  
+
   OrbitIntegratorWithStats OI(XV, Phi, 10000.);
 
-  
-  
+
+
   while(getline(data,line)) {
     if(line[0] != '#') {
       std::stringstream ss(line);
@@ -79,15 +79,15 @@ int main(int argc,char *argv[])
       // One could instead use:
       // OC.takeHGP_units(GalacticCoords); // (without converting units)
       // XV = OC.giveGCY();
-      
+
       OI.setup(XV);
       if(OI.run() == 0) {
-	output << OI.MinR << ' ' << OI.MaxR<< ' ' << OI.Maxz<< ' '
-	       << OI.Minr << ' ' << OI.Maxr<< ' ' << OI.MeanR<< ' '
-	       << OI.Energy/(Units::kms*Units::kms)<< ' '
-	       << OI.Lz/(Units::kms*Units::kpc) << '\n';
+        output << OI.MinR << ' ' << OI.MaxR<< ' ' << OI.Maxz<< ' '
+               << OI.Minr << ' ' << OI.Maxr<< ' ' << OI.MeanR<< ' '
+               << OI.Energy/(Units::kms*Units::kms)<< ' '
+               << OI.Lz/(Units::kms*Units::kpc) << '\n';
       }
-      
+
     }
 
   }

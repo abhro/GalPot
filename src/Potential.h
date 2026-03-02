@@ -38,47 +38,47 @@ public:
 
     double Lzsquare() const             { return Lzsq; }
 
-    virtual double operator()(				// returns Phi(R,z)
-			      const double,		// given R
-			      const double)const=0;	// and z
+    virtual double operator()(                          // returns Phi(R,z)
+                              const double,             // given R
+                              const double)const=0;     // and z
 
-    virtual double operator()(				// returns Phi(R,z)
-			      const double,		// given R
-			      const double,		// and z
-			      double&,			// also computes dPhi/dR
-			      double&)const=0;		// and dPhi/dz
+    virtual double operator()(                          // returns Phi(R,z)
+                              const double,             // given R
+                              const double,             // and z
+                              double&,                  // also computes dPhi/dR
+                              double&)const=0;          // and dPhi/dz
 
-    virtual double RfromLc   (				// returns Rc,
-			      const double,		// given Lz. possibly
-			      double* =0)const;	// returns dRc/dLz.
+    virtual double RfromLc   (                          // returns Rc,
+                              const double,             // given Lz. possibly
+                              double* =0)const; // returns dRc/dLz.
 
-    virtual double LfromRc   (				// returns Lc,
-  		      const double R,		// given R. possibly
-  		      double* dR=0) const {        	// returns dLz/dRc.
+    virtual double LfromRc   (                          // returns Lc,
+                      const double R,           // given R. possibly
+                      double* dR=0) const {             // returns dLz/dRc.
       double dPR,dPz,P;
       P = (*this)(R,0.,dPR,dPz);
       return sqrt(R*R*R*dPR);
     }
-    virtual Frequencies KapNuOm(			// returns kappa,nu,Om
-				const double)const=0;	// given R at z=0
+    virtual Frequencies KapNuOm(                        // returns kappa,nu,Om
+                                const double)const=0;   // given R at z=0
 
     double eff(const double R, const double z) const
-	{ if(Lzsq==0.) return (*this)(R,z);
+        { if(Lzsq==0.) return (*this)(R,z);
           if(R==0.) {
-	      cerr << " error in class Potential::eff: R=0 at non-zero Lz\n";
+              cerr << " error in class Potential::eff: R=0 at non-zero Lz\n";
               exit(1); }
           return (*this)(R,z) + 0.5 * Lzsq/(R*R); }
 
     double eff(const double R, const double z, double& dPdR, double& dPdz) const
-	{
-	  if(Lzsq==0.) return (*this)(R,z,dPdR,dPdz);
-    	  if(R==0.) {
+        {
+          if(Lzsq==0.) return (*this)(R,z,dPdR,dPdz);
+          if(R==0.) {
               cerr << " error in class Potential::eff: R=0 at non-zero Lz\n";
               exit(1); }
-    	  double potential     = (*this)(R,z,dPdR,dPdz);
-   	  double Lzsq_over_Rsq = Lzsq/(R*R);
-   	  dPdR                         -= Lzsq_over_Rsq / R;
-    	  return potential + 0.5 * Lzsq_over_Rsq; }
+          double potential     = (*this)(R,z,dPdR,dPdz);
+          double Lzsq_over_Rsq = Lzsq/(R*R);
+          dPdR                         -= Lzsq_over_Rsq / R;
+          return potential + 0.5 * Lzsq_over_Rsq; }
 };
 
 
@@ -99,8 +99,8 @@ inline double Potential::RfromLc(const double L, double* dR) const
     LcR=pow(R*R*R*dPR,0.5);
     if(LcR == L) return R;
     if((L< LcR && L>oldL) ||(L>LcR && L<oldL)){
-	R=(more)? exp(lR-0.5*dlR) : exp(lR+0.5*dlR);
-	return R;}
+        R=(more)? exp(lR-0.5*dlR) : exp(lR+0.5*dlR);
+        return R;}
     oldL=LcR;
   }
 

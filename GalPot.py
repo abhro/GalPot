@@ -23,36 +23,36 @@ class GalaxyPotential:
     filename : string
         Name of the parameter file for the GalaxyPotential.
 
-    This is put here as a (hopefully) convenient method of using GalPot 
+    This is put here as a (hopefully) convenient method of using GalPot
     in this new Pythonic world.
     The original C++ code is still the main element.
 
-    Everything is given in GalaxyPotential's internal units, with are 
+    Everything is given in GalaxyPotential's internal units, with are
     kpc, Myr and M_solar
 
     Methods
     ----------
     Potential(R,z) :            returns P
         Potential at postion(s)
-    Potential_derivatives(R,z): returns P, dPdR, dPdz 
+    Potential_derivatives(R,z): returns P, dPdR, dPdz
         Potential and derivatives at position(s)
-    ForceRz(R,z) :              returns f_R,f_z 
+    ForceRz(R,z) :              returns f_R,f_z
         specific force from potential at position(s)
-    Acceleration(xv_cyl) :      returns a_R, a_z, a_phi 
+    Acceleration(xv_cyl) :      returns a_R, a_z, a_phi
         acceleration of moving body in potential
-    XVDerivative(xv_cyl):       returns dxv/dt 
+    XVDerivative(xv_cyl):       returns dxv/dt
         derivative of phase space position (for orbit integration)
-    Density(R,z):               returns rho 
+    Density(R,z):               returns rho
         density at position(s)
-    Vcirc2(R):                  returns vcirc^2 
+    Vcirc2(R):                  returns vcirc^2
         square of circular velocity at R (single value or array)
     Vcirc(R):                   returns vcirc
         circular velocity at R (single value or array)
-    KapNuOm(R)                  returns kappa,nu,omega 
+    KapNuOm(R)                  returns kappa,nu,omega
         epicycle frequencies at R (single value only)
     RfromLc(Lz)                 returns R
         radius of circular orbit with angular momentum Lz
-    LfromRc(R)                  returns Lz 
+    LfromRc(R)                  returns Lz
         angular momentum of circular orbit with radius R
 
     Members
@@ -135,12 +135,12 @@ class GalaxyPotential:
 
         Parameters:
             R: Float or array of floats.
-                Galactocentric radius (cylindrical) in kpc. 
+                Galactocentric radius (cylindrical) in kpc.
             z: Float or array of floats.
-                Galactocentric z in kpc. 
+                Galactocentric z in kpc.
         Returns:
             pot: Float or numpy array.
-                Potential in M_solar kpc**2/Myr**2. 
+                Potential in M_solar kpc**2/Myr**2.
         """
         if len(np.array(R).reshape(-1)) == 1:
             return lib.GalPot_Potential_single(self.obj,c_double(R),c_double(z)) #* self.kpc_Myr_to_km_s**2
@@ -164,17 +164,17 @@ class GalaxyPotential:
 
         Parameters:
             R: Float or array of floats.
-                Galactocentric radius (cylindrical) in kpc. 
+                Galactocentric radius (cylindrical) in kpc.
             z: Float or array of floats.
-                Galactocentric z in kpc. 
+                Galactocentric z in kpc.
 
         Returns:
             pot: Float or numpy array.
-                Potential in M_solar kpc**2/Myr**2. 
+                Potential in M_solar kpc**2/Myr**2.
             dPdR: Float or numpy array.
-                Derivative of pot wrt to R in M_solar kpc/Myr**2. 
+                Derivative of pot wrt to R in M_solar kpc/Myr**2.
             dPdz: Float or numpy array.
-                Derivative of pot wrt to z in M_solar kpc/Myr**2. 
+                Derivative of pot wrt to z in M_solar kpc/Myr**2.
         """
         if len(np.array(R).reshape(-1)) == 1:
             dPdR = c_double()
@@ -362,7 +362,7 @@ class GalaxyPotential:
         """
         kappa,nu,Om = c_double(0.),c_double(0.),c_double(0.)
         lib.GalPot_KapNuOm_single(self.obj,c_double(R),kappa,nu,Om)
-        
+
         return np.double(kappa),np.double(nu),np.double(Om)
 
     def RfromLc(self,Lz):
@@ -403,25 +403,25 @@ class OrbitIntegrator:
     ----------
     GalaxyPotentialInput : GalaxyPotential
         GalaxyPotential in which the orbit will be integrated.
-    
 
-    This is put here as a convenient method using the orbit integrator with 
+
+    This is put here as a convenient method using the orbit integrator with
     GalPot in Python.
 
-    The original C++ code is still the main element, and this just calls 
-    the relevant functions. It is noticibly faster than using Python 
+    The original C++ code is still the main element, and this just calls
+    the relevant functions. It is noticibly faster than using Python
     integrators if you are only interested in the orbital parameters.
 
-    Everything is given in GalaxyPotential's internal units, with are 
+    Everything is given in GalaxyPotential's internal units, with are
     kpc, Myr and M_solar.
-    To convert to km/s, it may be convenient to use the value 
-    GalaxyPotential.kpc_Myr_to_km_s 
+    To convert to km/s, it may be convenient to use the value
+    GalaxyPotential.kpc_Myr_to_km_s
 
     Methods
     ----------
-    getOrbitStats(XV, t_end) :      returns OrbitStat, a named tuple 
+    getOrbitStats(XV, t_end) :      returns OrbitStat, a named tuple
                                     containing orbit properties
-    getOrbitPathandStats(XV,times): returns position and velocity on orbit 
+    getOrbitPathandStats(XV,times): returns position and velocity on orbit
                                     at specified times, and OrbitStat
 
     """
@@ -435,7 +435,7 @@ class OrbitIntegrator:
             GalaxyPotentialInput : GalaxyPotential
                 GalaxyPotential in which the orbit will be integrated.
         """
-        
+
         # Declare various things from the C++ code
         lib.OrbitIntegrator_new.restype = c_void_p
         lib.OrbitIntegrator_new.argtypes = [c_void_p, c_double]
@@ -465,15 +465,15 @@ class OrbitIntegrator:
 
         Parameters:
             XV:     ndarray or list (dimensions N x 6)
-                Position & velocity [R,z,phi,v_R,v_z,v_phi] with units 
+                Position & velocity [R,z,phi,v_R,v_z,v_phi] with units
                 kpc, radians, kpc/Myr.
             t_end: float (default 13800.)
                 Final integration time (by default 13800 Myr)
 
         Returns:
 
-            Energy: ndarray (or float if one dimensional array input)           
-                Orbital Energy. If positive, orbit is unbound, and 
+            Energy: ndarray (or float if one dimensional array input)
+                Orbital Energy. If positive, orbit is unbound, and
                 values other than Lz are set to 0
             Lz: ndarray (or float if one dimensional array input)
                 Angular Momentum
@@ -486,14 +486,14 @@ class OrbitIntegrator:
             GuidingRadius: ndarray (or float if one dimensional array input)
                 Radius of a circular orbit with the same angular momentum
             PseudoEccentricity: ndarray (or float if one dimensional array input)
-                (Apocentre-Pericentre)/(Apocentre+Pericentre). I call it 
+                (Apocentre-Pericentre)/(Apocentre+Pericentre). I call it
                 "Pseudo" becuase eccentricity only really makes sense in a
                 sperically symmetric system
 
         """
-        
+
         oneD = False
-        
+
         try:
         # `sample` is an ND-array.
             Nvalues, Ndim = XV.shape
@@ -502,7 +502,7 @@ class OrbitIntegrator:
             XV = np.atleast_2d(XV)
             Nvalues, Ndim = XV.shape
             if Nvalues == 1 : oneD=True
-        
+
         assert (Ndim == 6), ("Input must have 6 values per array row "
                              +"(R,z,phi,vR,vz,vphi)")
 
@@ -512,11 +512,11 @@ class OrbitIntegrator:
         output_c = ArrayWithLength7N()
         for i,XVval in enumerate(XV.flatten()):
             XV_c[i] = XVval
-        
+
         #lib.resetOrbitIntegratorEndTime(self.obj,c_double(t_end))
         lib.resetOrbitIntegratorEndTime(self.obj,c_double(t_end))
         lib.runOrbitIntegratorforstats(self.obj,XV_c,output_c,Nvalues)
-        
+
         Energy              = output_c[0::7]
         Lz                  = output_c[1::7]
         Pericentre          = output_c[2::7]
@@ -527,7 +527,7 @@ class OrbitIntegrator:
         OrbitStat = namedtuple('OrbitStat',
                                ('Energy','Lz','Pericentre','Apocentre','Zmax',
                                 'GuidingRadius','PseudoEccentricity'))
-        if oneD : 
+        if oneD :
             return OrbitStat(Energy[0],Lz[0],Pericentre[0],Apocentre[0],
                              Zmax[0],GuidingRadius[0],PseudoEccentricity[0])
         return OrbitStat(np.array(Energy),np.array(Lz),np.array(Pericentre),
@@ -538,24 +538,24 @@ class OrbitIntegrator:
     def getOrbitPathandStats(self,XV, times):
         """Returns orbital path and stats for the orbit that starts at point XV
 
-        Orbit is integrated over the times given, which should be in 
+        Orbit is integrated over the times given, which should be in
         strictly increasing (or decreasing) order. Times are in Myr.
         Parameters:
             XV:     ndarray or list (dimensions N x 6)
-                Position & velocity [R,z,phi,v_R,v_z,v_phi] with units 
+                Position & velocity [R,z,phi,v_R,v_z,v_phi] with units
                 kpc, radians, kpc/Myr.
 
             times - ndarray or list (1 dimensional)
                 Times for output of orbital path, with units Myr
-       
+
         Returns:
             paths:
-                Position & velocity [R,z,phi,v_R,v_z,v_phi] on the orbits at 
-                the specified times. 
+                Position & velocity [R,z,phi,v_R,v_z,v_phi] on the orbits at
+                the specified times.
 
             OrbitStats: a named tuple containing the following
-                Energy: ndarray (or float if one dimensional array input)           
-                    Orbital Energy. If positive, orbit is unbound, and 
+                Energy: ndarray (or float if one dimensional array input)
+                    Orbital Energy. If positive, orbit is unbound, and
                     values other than Lz are set to 0
                 Lz: ndarray (or float if one dimensional array input)
                     Angular Momentum
@@ -568,7 +568,7 @@ class OrbitIntegrator:
                 GuidingRadius: ndarray (or float if one dimensional array input)
                     Radius of a circular orbit with the same angular momentum
                 PseudoEccentricity: ndarray (or float if one dimensional array input)
-                    (Apocentre-Pericentre)/(Apocentre+Pericentre). I call it 
+                    (Apocentre-Pericentre)/(Apocentre+Pericentre). I call it
                     "Pseudo" becuase eccentricity only really makes sense in a
                     sperically symmetric system
 
@@ -577,7 +577,7 @@ class OrbitIntegrator:
         t_end = times[np.argmax(np.absolute(times))]
 
         oneD = False
-        
+
         try:
         # `sample` is an ND-array.
             Nvalues, Ndim = XV.shape
@@ -601,30 +601,30 @@ class OrbitIntegrator:
         output_path_c = ArrayWithLengthntN6()
 
         for i,t in enumerate(times) :
-            input_t_c[i] = t 
+            input_t_c[i] = t
         for i,XVval in enumerate(XV.flatten()):
             XV_c[i] = XVval
-        
+
         # call c++ routines
 
         lib.resetOrbitIntegratorEndTime(self.obj,c_double(t_end))
 
-        lib.runOrbitIntegratorwithPath(self.obj,XV_c,input_t_c,nt, 
+        lib.runOrbitIntegratorwithPath(self.obj,XV_c,input_t_c,nt,
                                        output_path_c,output_c, Nvalues)
         # organise output
         paths = np.array(output_path_c).reshape([Nvalues,-1,6])
-        
+
         Energy              = output_c[0::7]
         Lz                  = output_c[1::7]
         Pericentre          = output_c[2::7]
         Apocentre           = output_c[3::7]
         Zmax                = output_c[4::7]
         GuidingRadius       = output_c[5::7]
-        PseudoEccentricity  = output_c[6::7]       
+        PseudoEccentricity  = output_c[6::7]
         OrbitStat = namedtuple('OrbitStat',
                                ('Energy','Lz','Pericentre','Apocentre','Zmax',
                                 'GuidingRadius','PseudoEccentricity'))
-        if oneD : 
+        if oneD :
             return paths[0],OrbitStat(Energy[0],Lz[0],Pericentre[0],Apocentre[0],
                              Zmax[0],GuidingRadius[0],PseudoEccentricity[0])
         return paths, OrbitStat(np.array(Energy),np.array(Lz),np.array(Pericentre),

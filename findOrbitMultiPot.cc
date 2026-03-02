@@ -94,28 +94,28 @@ int main(int argc,char *argv[])
  if(IntegrationFail == 0) {
    cout << "Guiding Centre radius: " << OI.GuidingRadius << '\n' << std::flush;
    cout << "Minimum, Maximum Cylindrical radius: "<< OI.MinR << ','
-	<< OI.MaxR << '\n'
-	<< "Maximum z: " << OI.Maxz << '\n'
-	<< "Minimum, Maximum Spherical radius: "<< OI.Minr << ','
-	<< OI.Maxr << '\n'
-	<< "Energy: " << OI.Energy/(Units::kms*Units::kms) << " km^2/s^2\n"
-	<< "Angular Momentum (about symmetry axis): "
-	<< OI.Lz/(Units::kms*Units::kpc)
-	<< " kpc km/s\n"
-       	<< "Mean Cylindrical radius: "<< OI.MeanR << '\n' << std::flush;
+        << OI.MaxR << '\n'
+        << "Maximum z: " << OI.Maxz << '\n'
+        << "Minimum, Maximum Spherical radius: "<< OI.Minr << ','
+        << OI.Maxr << '\n'
+        << "Energy: " << OI.Energy/(Units::kms*Units::kms) << " km^2/s^2\n"
+        << "Angular Momentum (about symmetry axis): "
+        << OI.Lz/(Units::kms*Units::kpc)
+        << " kpc km/s\n"
+        << "Mean Cylindrical radius: "<< OI.MeanR << '\n' << std::flush;
    for(int i=0;i!=nOut;i++) {
      out << OrbOut[i][0] / Units::kpc  << ' '
-	 << OrbOut[i][1] / Units::kpc  << ' '
-	 << OrbOut[i][2] / Units::degree  << ' '
-	 << OrbOut[i][3] / Units::kms  << ' '
-	 << OrbOut[i][4] / Units::kms  << ' '
-	 << OrbOut[i][5] / Units::kms  << '\n' << std::flush;
+         << OrbOut[i][1] / Units::kpc  << ' '
+         << OrbOut[i][2] / Units::degree  << ' '
+         << OrbOut[i][3] / Units::kms  << ' '
+         << OrbOut[i][4] / Units::kms  << ' '
+         << OrbOut[i][5] / Units::kms  << '\n' << std::flush;
    }
  } else {
   // This line should never be reached (change 2026)
    cout << "Input unbound in potential. Energy "
-	<< OI.Energy/(Units::kms*Units::kms) << " km^2/s^2\n"
-	<< std::flush;
+        << OI.Energy/(Units::kms*Units::kms) << " km^2/s^2\n"
+        << std::flush;
  }
 
  out.close();

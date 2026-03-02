@@ -237,22 +237,22 @@ double DiskAnsatz::operator() (const double R, const double z, const double r,
     if(hollow && r==0.) f=fp=0.;
     else if(eps) {
       if(hollow) {
-	 double rq=r*r,cr=cos(Pi*r/Rd),sr=sin(Pi*r/Rd);
-	f   = exp(-R0/r-r/Rd+eps*cr);
-	fp  = (R0/rq-(1.+eps*sr)/Rd)*f;
+         double rq=r*r,cr=cos(Pi*r/Rd),sr=sin(Pi*r/Rd);
+        f   = exp(-R0/r-r/Rd+eps*cr);
+        fp  = (R0/rq-(1.+eps*sr)/Rd)*f;
       } else {
-	 double cr=cos(Pi*r/Rd),sr=sin(Pi*r/Rd);
-	f   = exp(-r/Rd+eps*cr);
-	fp  = -(1.+eps*sr)*f/Rd;
+         double cr=cos(Pi*r/Rd),sr=sin(Pi*r/Rd);
+        f   = exp(-r/Rd+eps*cr);
+        fp  = -(1.+eps*sr)*f/Rd;
       }
     } else {
       if(hollow) {
-	 double rq=r*r;
-	f   = exp(-R0/r-r/Rd);
-	fp  = (R0/rq-1./Rd)*f;
+         double rq=r*r;
+        f   = exp(-R0/r-r/Rd);
+        fp  = (R0/rq-1./Rd)*f;
       } else {
-	f  = exp(-r/Rd);
-	fp =-f/Rd;
+        f  = exp(-r/Rd);
+        fp =-f/Rd;
       }
     }
     dP[0] = fac *  R/r * fp * g;
@@ -541,8 +541,8 @@ double Spheroids::gamma() const
 // class Multipole
 ////////////////////////////////////////////////////////////////////////////////
 const int N =LMAX/2+1;   // number of multipoles
-const int N2=3*N/2;	   // number of grid point for cos[theta] in [0,1]
-const int N4=5*N/2; 	   // number of points used to integrate over cos[theta]
+const int N2=3*N/2;        // number of grid point for cos[theta] in [0,1]
+const int N4=5*N/2;        // number of points used to integrate over cos[theta]
 
 typedef Vector<double,N> DBN;
 
@@ -624,8 +624,8 @@ void Multipole::setup(const double ri, const double ra,
   //nemo_dprintf(5,"Multipole::setup(): 0\n");
   if(beta>0. && beta<3.) {
     std::cerr<<" Warning: beta= "<<beta
-	     <<" unsuitable for Multipole expansion;"
-	     <<" we'll take beta=3.2\n";
+             <<" unsuitable for Multipole expansion;"
+             <<" we'll take beta=3.2\n";
     beta=3.2;
   }
   //
@@ -701,16 +701,16 @@ void Multipole::setup(const double ri, const double ra,
       ( (r[k+1]+dx)*rhl2[k] - (r[k]-dx)*rhl2[k+1] );
     A[1] = rhol[k+1]-rhol[k]
       + sixth * ( (dx2-three*r[k+1]*r[k+1]) * rhl2[k]
-		  -(dx2-three*r[k]*r[k])     * rhl2[k+1] );
+                  -(dx2-three*r[k]*r[k])     * rhl2[k+1] );
     A[2] = half  * (r[k+1]*rhl2[k] - r[k]*rhl2[k+1]);
     A[3] = sixth * (rhl2[k+1]-rhl2[k]);
     for(l=0,ll=2; l<N; l++,ll+=2) {
       xl_ll = r[k]*EX(l);
       xh_ll = r[k+1];
       for(i=0,lli1=ll+1,dP=0.; i<4; i++,lli1++) {
-	xl_ll*= r[k];
-	xh_ll*= r[k+1];
-	dP   += A[i](l) * (xh_ll - xl_ll) / lli1;
+        xl_ll*= r[k];
+        xh_ll*= r[k+1];
+        dP   += A[i](l) * (xh_ll - xl_ll) / lli1;
       }
       P1[k+1][l] = EX(l) * P1[k](l) + dP / dx;
     }
@@ -741,17 +741,17 @@ void Multipole::setup(const double ri, const double ra,
       ( (r[k+1]+dx)*rhl2[k] - (r[k]-dx)*rhl2[k+1] );
     A[1] = rhol[k+1]-rhol[k]
       + sixth * ( (dx2-three*r[k+1]*r[k+1]) * rhl2[k]
-		  -(dx2-three*r[k]*r[k])     * rhl2[k+1] );
+                  -(dx2-three*r[k]*r[k])     * rhl2[k+1] );
     A[2] = half  * (r[k+1]*rhl2[k] - r[k]*rhl2[k+1]);
     A[3] = sixth * (rhl2[k+1]-rhl2[k]);
     for(l=0,ll=1,ril2=1.; l<N; l++,ll-=2,ril2*=risq) {
       xl_ll = r[k];
       xh_ll = r[k+1]*EX(l);
       for(i=0,lli1=ll+1,dP=0.; i<4; i++,lli1++) {
-	xl_ll *= r[k];
-	xh_ll *= r[k+1];
-	if(lli1) dP += A[i](l) * (xh_ll - xl_ll) / lli1;
-	else     dP += A[i](l) * ril2 * dlr;
+        xl_ll *= r[k];
+        xh_ll *= r[k+1];
+        if(lli1) dP += A[i](l) * (xh_ll - xl_ll) / lli1;
+        else     dP += A[i](l) * ril2 * dlr;
       }
       P2[k][l] = EX(l) * P2[k+1](l) + dP / dx;
     }
@@ -804,9 +804,9 @@ void Multipole::setup(const double ri, const double ra,
   for(i=0; i<N2; i++) {
     dLegendrePeven(P2l,dP2l,X[1][i]);
     for(k=0; k<K[0]; k++) {
-      Y[0][k][i] = Phil[k] * P2l;			// Phi
-      Y[1][k][i] = dPhl[k] * P2l;			// d Phi / d logR
-      Y[2][k][i] = Phil[k] * dP2l;		// d Phi / d cos(theta)
+      Y[0][k][i] = Phil[k] * P2l;                       // Phi
+      Y[1][k][i] = dPhl[k] * P2l;                       // d Phi / d logR
+      Y[2][k][i] = Phil[k] * dP2l;              // d Phi / d cos(theta)
     }
   }
   delete[] Phil;
@@ -901,21 +901,21 @@ double Multipole::RfromLc (const double L, double* dR) const
     if(!LR || L<=0.) {
         if(!LR) cerr<<" Multipole.RfromLc() was not initialized\n";
         if(dR) *dR=0.;
-	return 0.;
+        return 0.;
     }
      double lL=log(L);
     if(dR) {
          double R;
         if(lL<lzmin) {
-	    *dR = tg3;
-	    R   = Rmin * exp(tg3*(lL-lzmin));
+            *dR = tg3;
+            R   = Rmin * exp(tg3*(lL-lzmin));
         } else if(lL>lzmax) {
-	    *dR = 2.;
-	    R   = Rmax * exp(2.*(lL-lzmax));
+            *dR = 2.;
+            R   = Rmax * exp(2.*(lL-lzmax));
         } else
             R = exp(splev(lLc,logr,d2R,K[0],lL,dR));
         *dR *= R/L;
-	return R;
+        return R;
     }
     if(lL<lzmin)      return Rmin * exp(tg3*(lL-lzmin));
     else if(lL>lzmax) return Rmax * exp(2.*(lL-lzmax));
@@ -927,25 +927,25 @@ double Multipole::LfromRc (const double R, double* dL) const
     if(!LR || R<=0.) {
         if(!LR) cerr<<" Multipole.LfromRc() was not initialized\n";
         if(dL) *dL=0.;
-	return 0.;
+        return 0.;
     }
      double lR=log(R);
     if(dL) {
          double L;
         if(lR<lRmin) {
-	    *dL = g3h;
-	    L   = exp(lzmin + g3h*(lR-lRmin));
+            *dL = g3h;
+            L   = exp(lzmin + g3h*(lR-lRmin));
         } else if(lR>lRmax) {
-	    *dL = 0.5;
-	    L   = exp(lzmax + 0.5*(lR-lRmax));
+            *dL = 0.5;
+            L   = exp(lzmax + 0.5*(lR-lRmax));
         } else
             L = exp(splev(logr,lLc,d2L,K[0],lR,dL));
         *dL *= L/R;
-	return L;
+        return L;
     }
     if(lR<lRmin)      return exp(lzmin + g3h*(lR-lRmin));
     else if(lR>lRmax) return exp(lzmax + 0.5*(lR-lRmax));
-            	      return exp(splev(logr,lLc,d2L,K[0],lR));
+                      return exp(splev(logr,lLc,d2L,K[0],lR));
 }
 
 double Multipole::Laplace(const double r, const double ct) const

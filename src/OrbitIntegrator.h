@@ -37,10 +37,10 @@ public:
     void       set_tolerance(const double dE=0.) {tol= (dE)? fabs(dE) : 1.e-9;}
     void       set_maxstep  (const double dt=0.) {dtm= (dt)? fabs(dt) : 1.;}
     void       stepRK_by    (double&, const double=1.4);
-    
+
     Vector<double,6> XV        () const {
     Vector<double,6> xv=QP; xv[5] = xv[0]*xv[5]; return xv; }
-    
+
     double     Energy()     {return E;}
     double     AngularMomentum()     {return Jphi;}
     double     maxstep()    {return dtm;}
@@ -59,9 +59,9 @@ class OrbitIntegratorWithStats {
 public:
   OrbitIntegratorWithStats() {;}
   OrbitIntegratorWithStats(Vector<double,6> StartPoint, Potential *PotIn,
-			   double TmaxIn=13800.);
+                           double TmaxIn=13800.);
   ~OrbitIntegratorWithStats() {;}
-  
+
   void setup(Vector<double,6> StartPoint, Potential *PotIn, double TmaxIn);
   void setup(Vector<double,6> StartPoint);
 
@@ -79,21 +79,20 @@ public:
   double GuidingRadius;
   double MeanR;
   double PseudoEccentricity;
-  
+
   int run() { return runGeneric("NoOutput",NULL,NULL,1); }
-  
+
   int runWithOutput(Vector<double,6>*out, int N)
     { return runGeneric("OutputNoTimes",out,NULL,N); }
   // Output N points between 0 and Ttot (roughly evenly spaced)
-  
+
   int runWithOutputIncludingTime(Vector<double,6>*out, double *t, int N)
     { return runGeneric("OutputWithTimes",out,t,N); }
    // Output N points between 0 and Ttot, giving T in each case.
-  
+
   int runWithOutputAtGivenTimes(Vector<double,6>*out, double*T,int N)
     { return runGeneric("OutputSetTimes",out,T,N); }
   // Output N points at times T
 };
-
 
 #endif

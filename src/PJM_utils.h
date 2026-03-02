@@ -1,5 +1,5 @@
 /***************************************************************************//**
-\file PJM_utils.h 
+\file PJM_utils.h
 \brief Various useful little utilities.
 
 *                                                                              *
@@ -170,40 +170,40 @@ namespace PJM {
     void copy_array(T *m2, T *m1, int n) {
     for(int i=0;i<n;i++) m2[i] = m1[i];
   }
-  
+
   template <class T>
     void copy_array(T *m2, T *m1, int n, int m) {
-    for(int i=0;i<n;i++) 
-      for(int j=0;j<m;j++) 
-	m2[i][j] = m1[i][j];
+    for(int i=0;i<n;i++)
+      for(int j=0;j<m;j++)
+        m2[i][j] = m1[i][j];
   }
-  
+
   template <class T>
     void copy_array(T *m2, T *m1, int n, int m, int l) {
-    for(int i=0;i<n;i++) 
-      for(int j=0;j<m;j++) 
-	for(int k=0;k<l;k++)
-	  m2[i][j][k] = m1[i][j][k];
+    for(int i=0;i<n;i++)
+      for(int j=0;j<m;j++)
+        for(int k=0;k<l;k++)
+          m2[i][j][k] = m1[i][j][k];
   }
 
   template <class T>
     void fill_array(T *m2, T m1, int n) {
     for(int i=0;i<n;i++) m2[i] = m1;
   }
-  
+
   template <class T>
     void fill_array(T *m2, T m1, int n, int m) {
-    for(int i=0;i<n;i++) 
-      for(int j=0;j<m;j++) 
-	m2[i][j] = m1;
+    for(int i=0;i<n;i++)
+      for(int j=0;j<m;j++)
+        m2[i][j] = m1;
   }
-  
+
   template <class T>
     void fill_array(T *m2, T m1, int n, int m, int l) {
-    for(int i=0;i<n;i++) 
-      for(int j=0;j<m;j++) 
-	for(int k=0;k<l;k++)
-	  m2[i][j][k] = m1;
+    for(int i=0;i<n;i++)
+      for(int j=0;j<m;j++)
+        for(int k=0;k<l;k++)
+          m2[i][j][k] = m1;
   }
 
   void ERROR(string out) {
